@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 
-import sys, requests, urllib, json, csv
-import os
+import sys, requests, urllib, json, csv, os, datetime
 from bs4 import BeautifulSoup as bs
 
 
 class Currency:
 
     def __init__(self, name):
-        self.name = name
-        self.url = "https://coinmarketcap.com/currencies/"+name+"/historical-data/?start=20000101&end=20171013"
+        self.name = name.replace(' ', '-')
+        self.url = "https://coinmarketcap.com/currencies/"+self.name+"/historical-data/?start=20000101&end="+self.todays_date()
         self.dates = []
         self.opens = []
         self.highs = []
@@ -17,6 +16,33 @@ class Currency:
         self.closes = []
         self.volumes = []
         self.market_caps = []
+
+    def todays_date(self, formatted=False):
+        y = datetime.date.today().year
+        m = datetime.date.today().month
+        d = datetime.date.today().day
+        if formatted:
+            return "%d-%d-%d" % (y, m, d-1)
+        return "%d%d%d" % (y, m, d-1)
+
+    def up_to_date(self):
+        """
+        Returns true if currency's csv:
+          - exists
+          - has up to date data (checks for day before today)
+        Returns false otherwise
+        """
+        path = os.path.abspath('..'+os.sep+'Data/Crypto_Currencies'+os.sep+self.name+'.csv')
+        try:
+            f = open(path, 'r')
+        except IOError:
+            return False
+        f.readline() 		# clear header
+        latest_date = f.readline().split(',')[0]
+        f.close()
+        todays_date = self.todays_date(formatted=True)
+        return todays_date == latest_date
+        
 
     def format_dates(self):
         """
@@ -31,8 +57,8 @@ class Currency:
             new_dates.append(y+"-"+m+"-"+d)
         self.dates = new_dates
 
-    def remove_commas(self, entry):
-        return ''.join([char for char in entry if char != ","])
+    def remove_commas(self, line):
+        return ''.join([char for char in line if char != ","])
 
     def cleanse_commas(self):
         self.opens = [self.remove_commas(o) for o in self.opens]
@@ -56,28 +82,32 @@ class Currency:
 
 class Coin_Market_Cap_Spider:
     """
+    Spider for 'coinmarketcap.com'
+    Creates a list of Currency objects for each cryptocurrency on the site
+    Crawls main page to find all available currencies; crawls each currency page
     """
 
     def __init__(self):
-        self.url = "https://coinmarketcap.com"
+        self.url = "https://coinmarketcap.com/all/views/all"
         self.html = requests.get(self.url).text
         self.soup = bs(self.html, "html.parser")
         self.currencies = []
 
     def crawl_main_page(self):
         """
+        Creates list of currencies found on main page
+        Crawls each currency page to create Currency object
         """
-
         # a tag contains currencies
         #  class="currency-name-display"
         # href link to further details
-        for line in self.soup.findAll('a', class_="currency-name-display"):
-            #print line
-            #print line.text
-            #print "\n"
+        for line in self.soup.findAll('a', class_="currency-name-container"):
             self.currencies.append(Currency(line.text))
 
         for currency in self.currencies:
+            if currency.up_to_date():
+                print("[+] Currency '%s' already up-to-date" % currency.name)
+                continue
             try:
                 self.crawl_currency(currency)
                 currency.format_dates()
@@ -89,11 +119,19 @@ class Coin_Market_Cap_Spider:
 
     def crawl_currency(self, currency):
         """
+        Crawls specific page for given currency
         """
         html = requests.get(currency.url).text
         soup = bs(html, "html.parser")
-
         history = [line.text.split('\n\n') for line in soup.findAll('tbody')]
+
+        # Occasionally hyphenated names drop the second in the url
+        if (not history):
+            currency.url = currency.url.replace(currency.name, currency.name.split('-')[0])
+            html = requests.get(currency.url).text
+            soup = bs(html, "html.parser")
+            history = [line.text.split('\n\n') for line in soup.findAll('tbody')]
+
         history = history[0]
         for day in history:
             if day:
