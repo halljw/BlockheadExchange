@@ -1,0 +1,40 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.jumbotron {
+	text-align: center;
+	background-color: lightgrey;
+	background-size: cover;
+	color: white;
+}
+
+.btn-lg {
+	font-size: 36px;
+}
+
+ul.nav, .jumbotron h1 {
+	font-family: 'Arvo', courier, serif;
+}
+
+ul.nav {
+	font-size: 13px;
+}
+
+.jumbotron h1 {
+	margin-top: 0px;
+	margin-bottom: 50px;
+}
+
+.jumbotron p {
+	margin-bottom: 30px;
+	font-weight: 100;
+	padding: 0 50px;
+}
+
+.container {
+	text-align: center;
+}
+
