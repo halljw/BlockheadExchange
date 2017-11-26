@@ -92,6 +92,7 @@ class Coin_Market_Cap_Spider:
         self.html = requests.get(self.url).text
         self.soup = bs(self.html, "html.parser")
         self.currencies = []
+        self.failed_to_crawl = []
 
     def crawl_main_page(self):
         """
@@ -104,18 +105,20 @@ class Coin_Market_Cap_Spider:
         for line in self.soup.findAll('a', class_="currency-name-container"):
             self.currencies.append(Currency(line.text))
 
-        for currency in self.currencies:
+        l = len(self.currencies)
+        for i, currency in enumerate(self.currencies):
             if currency.up_to_date():
-                print("[+] Currency '%s' already up-to-date" % currency.name)
+                print("[+] %d/%d Currency '%s' already up-to-date" % (i+1, l, currency.name))
                 continue
             try:
                 self.crawl_currency(currency)
                 currency.format_dates()
                 currency.cleanse_commas()
                 currency.write_csv()
-                print("[+] Crawled: " + currency.name)
+                print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
             except:
-                print("[-] failed to crawl: " + currency.name)
+                print("[-] %d/%d failed to crawl: %s" % (i+1, l, currency.name))
+                self.failed_to_crawl.append(currency.name)
 
     def crawl_currency(self, currency):
         """
@@ -145,7 +148,23 @@ class Coin_Market_Cap_Spider:
                 currency.volumes.append(lines[5])
                 currency.market_caps.append(lines[6])
 
+    def log_failures(self):
+        """
+        Write log file detailing date, currencies which could not be updated
+        """
+        y = datetime.date.today().year
+        m = datetime.date.today().month
+        d = datetime.date.today().day
+        date = "%d-%d-%d" % (y, m, d-1)
+
+        f = open('log_failures.csv', 'a')
+        writer = csv.writer(f)
+        row = [date] + self.failed_to_crawl
+        writer.writerow(row)
+        f.close()
+       
 
 if __name__=='__main__':
     cmcs = Coin_Market_Cap_Spider()
     cmcs.crawl_main_page()
+    cmcs.log_failures()
