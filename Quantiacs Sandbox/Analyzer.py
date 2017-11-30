@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+The CryptoGuru Investment Analyzer
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,9 +17,8 @@ class Crypto_Currency_Analyzer:
   def __init__(self):
     self.features = ["Open", "High", "Low", "Close", "Volume", "Market_Cap"]
     self.available_currencies = [c[:-4] for c in os.listdir('Data')]
-    self.df = self.data_frame()
 
-  def data_frame(self, feature=None, currencies=None, start_date=None, end_date=None):
+  def data_frame(self, feature="Open", currencies=None, start_date=None, end_date=None):
     """
     Returns and sets a dataframe for the selected feature and currencies.
       Features:
@@ -27,13 +30,8 @@ class Crypto_Currency_Analyzer:
         - Market_cap
       Shows data for previous year as default.
     """
-    # Desired features; if non listed, opening price as default
-    if not feature:
-      feature = "Open"
-
-    # Desired currencies; if none listed, top three as default
     if not currencies:
-      currencies = ["Bitcoin", "Ethereum", "Ripple"]
+      raise ValueError("[-] Crypto_Currency_Analyzer.data_frame(currencies=[currencies])")
 
     # Desired dates; if none listed, past year as default
     if not start_date:
@@ -41,9 +39,10 @@ class Crypto_Currency_Analyzer:
     if not end_date:
       end_date = self.date()
 
-    if not self.allowable_inputs(feature, currencies, start_date, end_date):
-      return
+    # Check all inputs allowable
+    self.allowable_inputs(feature, currencies, start_date, end_date)
 
+    # Construct DataFrame
     dates = pd.date_range(start_date, end_date)
     df = pd.DataFrame(index = dates)
 
@@ -54,28 +53,21 @@ class Crypto_Currency_Analyzer:
                                parse_dates=True, usecols=["Date", feature],
                                na_values=["nan"]))
       df = df.rename(columns={feature: c})
-
-    self.df = df
+    self.df = df.dropna()
     return df.dropna()
 
   def allowable_inputs(self, feature, currencies, start_date, end_date):
     if feature not in self.features:
-      print("Feature '%s' is not a recorded feature in the data." % feature)
-      return False
+      raise ValueError("Feature '%s' is not a recorded feature in the data." % feature)
     if type(currencies) is not list:
-      print("Currencies '%s' should be entered as type [list]." % currencies)
-      return False
+      raise ValueError("Currencies '%s' should be entered as type [list]." % currencies)
     for currency in currencies:
       if currency not in self.available_currencies:
-        print("Currency '%s' is not available." % currency)
-        return False
+        raise ValueError("Currency '%s' is not available." % currency)
     if not self.check_date_format(start_date):
-      print("Please use date format 'yyyy-mm-dd'")
-      return False
+      raise ValueError("Please use date format 'yyyy-mm-dd'")
     if not self.check_date_format(end_date):
-      print("Please use date format 'yyyy-mm-dd'")
-      return False
-    return True
+      raise ValueError("Please use date format 'yyyy-mm-dd'")
 
   def date(self, year_offset=0):
     """
@@ -92,26 +84,21 @@ class Crypto_Currency_Analyzer:
       return False
 
   def fill_incomplete(self, df):
-    """
-    """
     df.fillna(method="ffill", inplace=True)
     df.fillna(method="bfill", inplace=True)
     return df
 
-  def normalize(self, df):
+  def normalize(self):
     """
     Normalize stock prices using first row of dataframe.
     """
-    return df / df.ix[0,:]
+    self.df = self.df / self.df.ix[0,:]
+    return self.df / self.df.ix[0,:]
 
-  def daily_returns(self, df=pd.DataFrame()):
-    if df.empty:
-      df = self.df
+  def daily_returns(self, df):
     return (df / df.shift(1)) - 1
 
-  def cumulative_returns(self, df=pd.DataFrame()):
-    if df.empty:
-      df = self.df
+  def cumulative_returns(self, df):
     return df / df.ix[0,:] - 1
 
   def plot_rolling_mean(self, df=pd.DataFrame(), currency=None, window=20, bollinger_bands=True):
@@ -139,17 +126,16 @@ class Crypto_Currency_Analyzer:
     self.plot_data_frame(df=rm, title=title)
     
 
-  def plot_data_frame(self, df=pd.DataFrame(), title="Cryptocurrency values"):
+  def plot_data_frame(self, title="Cryptocurrency values", show=False):
     """
     Plot the given data frame.
     """
-    if df.empty:
-      df = self.df
-    p = df.plot(title=title, fontsize=12)
+    p = self.df.plot(title=title, fontsize=12)
     p.set_xlabel("Date")
     p.set_ylabel("Value")
     p.legend(loc='upper left')
-
+    if show:
+      plt.show()
     figfile = BytesIO()
     plt.savefig(figfile, format='png')
     figfile.seek(0)
@@ -203,12 +189,14 @@ class Crypto_Currency_Analyzer:
 
 if __name__=='__main__':
   cca = Crypto_Currency_Analyzer()
-  cca.plot_data_frame()
-  cca.plot_rolling_mean(currency="Bitcoin")
-  cca.plot_rolling_mean(currency="Ethereum")
-  cca.daily_returns_histogram(currency="Bitcoin")
+  cca.data_frame(currencies=["Bitcoin"])
+  cca.plot_data_frame(show=True)
+  cca.normalize()
+  #cca.plot_rolling_mean(currency="Bitcoin")
+  #cca.plot_rolling_mean(currency="Ethereum")
+  #cca.daily_returns_histogram(currency="Bitcoin")
 
-  cca.daily_returns_relation(c1="Bitcoin", c2="Ethereum")
+  #cca.daily_returns_relation(c1="Bitcoin", c2="Ethereum")
 
   #df = cca.sharpe_ratio()
   #cca.plot_data_frame(df)

@@ -11,8 +11,6 @@ app = Flask(__name__, template_folder=".", static_folder="css")
 @app.route('/', methods = ['GET', 'POST'])
 def index():
   cca = Crypto_Currency_Analyzer()
-  # Available currency data
-  available_currencies = [currency[:-4] for currency in listdir('Data')]
 
   # If user has pushed "Graph"
   if request.method == 'POST':
@@ -22,7 +20,7 @@ def index():
   else:
     result = None
 
-  return render_template('index.html', result=result, currencies=available_currencies)
+  return render_template('index.html', result=result, currencies=cca.available_currencies)
 
 
 if __name__=='__main__':
