@@ -6,7 +6,7 @@ body {
 
 .jumbotron {
 	text-align: center;
-	background-image: url('../images/sea.jpeg');
+	background-image: url('images/sea.jpeg');
 	background-size: cover;
 	color: white;
 }
@@ -49,6 +49,7 @@ ul.nav {
 .carousel-inner {
 	/*background-color: lightgrey;*/
 	background-image: url('css/images/BitCoin3.jpg');
+	background-image: url('images/BitCoin3.jpg');
 	background-size: cover;
 	height: 500px;
 	top: 0;
