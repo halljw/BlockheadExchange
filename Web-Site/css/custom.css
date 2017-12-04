@@ -29,19 +29,11 @@ ul.nav {
 	padding-top: 10px;
 }
 
-.navbar-header {
-    text-align: center;
-    width: 100%;
-    display: inline-block;
-}
-
-.navbar-header a {
-	font-size: 36px;
+.navbar-brand a {
+	color: lightgoldenrodyellow;
+	font-size: 24px;
 	font-stretch: 100px;
-	display: inline-block;
 }
-
-.navbar-brand {float:none;}
 
 .jumbotron h1 {
 	margin-top: 0px;
@@ -55,7 +47,10 @@ ul.nav {
 }
 
 .carousel-inner {
-	background-color: lightgrey;
+	/*background-color: lightgrey;*/
+	background-image: url('../images/BitCoin3.jpg');
+	background-size: cover;
+	height: 500px;
 	top: 0;
 }
 
@@ -77,4 +72,39 @@ ul.nav {
   display: flex;
   align-items: center;
   vertical-align: middle;
+}
+
+blockquote.twitter-tweet {
+  display: inline-block;
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 16px;
+  border-color: #eee #ddd #bbb;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  margin: 10px 5px;
+  padding: 0 16px 16px 16px;
+  max-width: 468px;
+}
+
+blockquote.twitter-tweet p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+blockquote.twitter-tweet a {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+  outline: 0 none;
+}
+
+blockquote.twitter-tweet a:hover,
+
+blockquote.twitter-tweet a:focus {
+  text-decoration: underline;
 }
