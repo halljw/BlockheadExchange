@@ -6,7 +6,7 @@ body {
 
 .jumbotron {
 	text-align: center;
-	background-image: url('css/images/sea.jpeg');
+	background-image: url('images/sea.jpeg');
 	background-size: cover;
 	color: white;
 }
