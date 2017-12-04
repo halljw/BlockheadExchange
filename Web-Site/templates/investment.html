@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="HTML template for CryptoGuru Investment Analyzer">
+    <meta name="author" content="John Hall">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>CryptoGuru Investment Analyzer</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CryptoGuru</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>CryptoGuru Investment Analyzer</p>
+        <p><a class="btn btn-danger btn-lg" href="/" role="button">Reset &raquo;</a></p>
+      </div>
+    </div>
+ 
+
+    <div class="container">
+        
+          <!-- CURRENCY SELECTION -->
+          <form method="POST" action="">
+          <select name="currency" multiple="multiple" class="selectpicker form-control">
+            {% for currency in currencies %}
+              <option value="{{ currency }}">{{ currency }}</option>
+            {% endfor %}
+          </select>
+          
+
+          <!-- DATE SELECTION -->
+          <label for="startDate">Starting Date</label><input type="date" id="startDate" name="startDate" value="2016-01-01"/>
+          <label for="endDate">Ending Date</label><input type="date" id="endDate" name="endDate" value="{{ cur_date }}"/>
+
+     
+          <!-- RANGE SELECTION -->
+          <!-- Keep around for selecting high/low limits -->
+          <!--input type="range" name="startYear" min="2000" max="{{ max_y }}" step="1" value="2016" onchange="showYearValue(this.value)">
+          <h4>
+            <span id="startYearDisplay">2016</span>
+          </h4>
+          <input type="range" name="startMonth" min="1" max="12" step="1" value="1" onchange="showMonthValue(this.value)">
+          <h4>
+            <span id="startMonthDisplay">1</span>
+          </h4>
+          <script type="text/javascript">
+            function showYearValue(newValue)
+            {
+              document.getElementById("startYearDisplay").innerHTML=newValue;
+            }
+            function showMonthValue(newValue)
+            {
+              document.getElementById("startMonthDisplay").innerHTML=newValue;
+            }
+          </script-->
+
+
+          <!-- NORMALIZE CHECKBOX -->
+          <div>
+            <input type="checkbox" id="normalizeCheck" name="normalize" value=True>
+              <label for="normalizeCheck">
+                <h3>Normalize data</h3>
+              </label>
+          </div>
+
+          <!-- ROLLING MEAN PLOT CHECKBOX -->
+          <div>
+            <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True>
+              <label for="rollingMeanCheck">
+                <h3>Plot rolling mean</h3>
+              </label>
+          </div>
+          <!-- ADD WINDOW SIZE FOR ROLLING MEAN PLOT CHECKBOX -->
+          <!-- ADD RESTRICTION THAT ONLY ONE CURRENCY CAN BE SELECTED -->
+          <!-- need to use javascript to enable/disable attribute -->
+
+
+        <!-- GRAPH BUTTON -->
+        <input type="submit" value="Graph" class="btn btn-default">
+
+        </form>
+
+
+
+        {% if result %}
+          <img src="data:image/png;base64,{{ result }}" width="500">
+        {% endif %}
+
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Header</h2>
+          <p>TYPE HERE. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+          <h2>Header</h2>
+          <p>TYPE HERE</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Header</h2>
+          <p>TYPE HERE</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Header</h2>
+          <p>TYPE HERE</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Header</h2>
+          <p>TYPE HERE</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+</html>
+
