@@ -11,8 +11,8 @@ app = Flask(__name__, template_folder="../templates", static_folder="../css")
 
 # The main view of CryptoGuru Invemestment Analyzer
 @app.route('/', methods = ['GET', 'POST'])
-def index():
-  return render_template('index.html')
+def landing():
+  return render_template('landing.html')
 
 
 # The main view of CryptoGuru Invemestment Analyzer
