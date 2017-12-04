@@ -49,8 +49,8 @@ class Crypto_Currency_Analyzer:
     # Join using date as index
     # Rename feature to currency name
     for c in currencies:
-      df = df.join(pd.read_csv("../Data/"+c+".csv", index_col="Date",
-                               parse_dates=True, usecols=["Date", feature],
+      df = df.join(pd.read_csv("../Data/"+c+".txt", index_col="DATE",
+                               parse_dates=True, usecols=["DATE", feature],
                                na_values=["nan"]))
       df = df.rename(columns={feature: c})
     self.df = df.dropna()

@@ -17,6 +17,18 @@ class Currency:
         self.volumes = []
         self.market_caps = []
 
+    def reverse_lists(self):
+        """
+        Reverses the order of all lists in the currency
+        """
+        self.dates.reverse()
+        self.opens.reverse()
+        self.highs.reverse()
+        self.lows.reverse()
+        self.closes.reverse()
+        self.volumes.reverse()
+        self.market_caps.reverse()
+
     def todays_date(self, formatted=False):
         y = datetime.date.today().year
         m = datetime.date.today().month
@@ -32,13 +44,13 @@ class Currency:
           - has up to date data (checks for day before today)
         Returns false otherwise
         """
-        path = os.path.abspath('..'+os.sep+'Data/Crypto_Currencies'+os.sep+self.name+'.csv')
+        path = os.path.abspath('..'+os.sep+'..'+os.sep+'Data'+os.sep+self.name+'.txt')
         try:
             f = open(path, 'r')
         except IOError:
             return False
-        f.readline() 		# clear header
-        latest_date = f.readline().split(',')[0]
+        lines = f.readlines()
+        latest_date = lines[-1].split(',')[0]
         f.close()
         todays_date = self.todays_date(formatted=True)
         return todays_date == latest_date
@@ -54,7 +66,7 @@ class Currency:
             m = MONTHS[date.split()[0]]
             d = self.remove_commas(date.split()[1])
             y = date.split()[2]
-            new_dates.append(y+"-"+m+"-"+d)
+            new_dates.append(y+m+d)
         self.dates = new_dates
 
     def remove_commas(self, line):
@@ -69,13 +81,14 @@ class Currency:
         self.market_caps = [self.remove_commas(m) for m in self.market_caps]
 
     def write_csv(self):
-        header = ["Date", "Open", "High", "Low", "Close", "Volume", "Market_cap"]
-        path = os.path.abspath('..'+os.sep+'Data/Crypto_Currencies'+os.sep+self.name+'.csv')
+        self.reverse_lists()
+        header = ["DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOL", "P", "R", "RINFO"]
+        path = os.path.abspath('..'+os.sep+'..'+os.sep+'Data'+os.sep+self.name+'.txt')
         f = open(path, 'w')
         writer = csv.writer(f)
         writer.writerow(header)
-        for d, o, h, l, c, v, m in zip(self.dates, self.opens, self.highs, self.lows, self.closes, self.volumes, self.market_caps):
-            row = [d, o, h, l, c, v, m]
+        for d, o, h, l, c, v in zip(self.dates, self.opens, self.highs, self.lows, self.closes, self.volumes):
+            row = [d, o, h, l, c, v, 0, 0, 0]
             writer.writerow(row)
         f.close()
 
