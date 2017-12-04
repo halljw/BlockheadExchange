@@ -65,16 +65,17 @@ class Crypto_Currency_Analyzer:
       if currency not in self.available_currencies:
         raise ValueError("Currency '%s' is not available." % currency)
     if not self.check_date_format(start_date):
-      raise ValueError("Please use date format 'yyyy-mm-dd'")
+      raise ValueError("start_date '%s' poorly formated\nPlease use date format 'yyyy-mm-dd'" % start_date)
     if not self.check_date_format(end_date):
-      raise ValueError("Please use date format 'yyyy-mm-dd'")
+      raise ValueError("end_date '%s' poorly formated\nPlease use date format 'yyyy-mm-dd'" % end_date)
 
   def date(self, year_offset=0):
     """
     Return formatted string containing today's date
     """
     date = datetime.datetime.now()
-    return str(date.year - year_offset) + "-" + str(date.month) + "-" + str(date.day)
+    date_str = '%04d-%02d-%02d' % (date.year - year_offset, date.month, date.day)
+    return date_str
 
   def check_date_format(self, date):
     date_reg = re.compile('([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])')
@@ -101,19 +102,17 @@ class Crypto_Currency_Analyzer:
   def cumulative_returns(self, df):
     return df / df.ix[0,:] - 1
 
-  def plot_rolling_mean(self, df=pd.DataFrame(), currency=None, window=20, bollinger_bands=True):
-    if df.empty:
-      df = self.df
+  def plot_rolling_mean(self, currency=None, window=20, bollinger_bands=True):
     if not currency:
-      print("Select currency to plot")
+      print("[-] Select currency to plot")
       return
-    if not currency in df:
-      print("Currency %s not in data frame." % currency)
+    if not currency in self.df:
+      print("[-] Currency %s not in data frame." % currency)
       return
-    rm = pd.DataFrame(pd.rolling_mean(df[currency], window=window))
+    rm = pd.DataFrame(pd.rolling_mean(self.df[currency], window=window))
 
     if bollinger_bands:
-      std = pd.DataFrame(pd.rolling_std(df[currency], window=window))
+      std = pd.DataFrame(pd.rolling_std(self.df[currency], window=window))
       upper_band = pd.DataFrame(rm + std * 2)
       lower_band = pd.DataFrame(rm - std * 2)
 
@@ -123,7 +122,15 @@ class Crypto_Currency_Analyzer:
       rm = rm.join(upper_band).join(lower_band)
 
     title = currency + " rolling mean"
-    self.plot_data_frame(df=rm, title=title)
+    p = rm.plot(title=title, fontsize=12)
+    p.set_xlabel("Date")
+    p.set_ylabel("Value")
+    p.legend(loc='upper left')
+    figfile = BytesIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)
+    figdata_png = base64.b64encode(figfile.getvalue())
+    return figdata_png
     
 
   def plot_data_frame(self, title="Cryptocurrency values", show=False):

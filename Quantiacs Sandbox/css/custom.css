@@ -38,3 +38,7 @@ ul.nav {
 	text-align: center;
 }
 
+.jumbotron h4 {
+  font-size: 30px;
+  color: white;
+}
