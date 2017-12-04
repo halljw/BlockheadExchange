@@ -48,7 +48,6 @@ ul.nav {
 
 .carousel-inner {
 	/*background-color: lightgrey;*/
-	background-image: url('css/images/BitCoin3.jpg');
 	background-image: url('images/BitCoin3.jpg');
 	background-size: cover;
 	height: 500px;
