@@ -29,6 +29,11 @@ ul.nav {
 	padding-top: 10px;
 }
 
+.personal-photo {
+	padding: 20px;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+}
+
 .navbar-brand a {
 	color: lightgoldenrodyellow;
 	font-size: 24px;
