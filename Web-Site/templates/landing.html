@@ -1,304 +1,245 @@
+{% extends "layout.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+{% block content %}
 
-    <title>CryptoGuru</title>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+      <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
 
-    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/custom.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  </head>
-
-  <body style="padding-top: 0px;">
-
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-      	 <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#" style="color: lightgoldenrodyellow; font-family: 'Arvo', courier, serif; font-size: 36px">CryptoGurus</a>
-          <img src="css/images/emblem.png" style="height: 50px; width: 50px; padding-bottom: 5px;">
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-          	<li><a href="#" style="color: lightgoldenrodyellow">WHO WE ARE</a></li>
-            <li><a href="#" style="color: lightgoldenrodyellow">ASK A GURU</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-        <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-      </ol>
-
-        <!-- Wrapper for slides -->
-      <div class="carousel-inner">
+      <!-- Wrapper for slides -->
+    <div class="carousel-inner">
       
-        <div class="item active">
-          <h2 style="text-align: center;">Today's Trends!</h2>
-          <div class="container">   
-            <div class="row">  
-              <div class="col-md-1">
-              </div>     
-              <div class="col-md-5">
-                <div class='tableauPlaceholder' id='viz1511731443388' style='position: relative'>
-                  <noscript>
-                    <a href='#'>
-                      <img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CryptoTradingRangebyMonth&#47;Sheet1&#47;1_rss.png' style='border: none' />
-                    </a>
-                  </noscript>
-                  <object class='tableauViz'  style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='CryptoTradingRangebyMonth&#47;Sheet1' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CryptoTradingRangebyMonth&#47;Sheet1&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' />
-                  </object>
-                </div>   
-              </div>
-              <div class="col-md-5">
-                <div class='tableauPlaceholder' id='viz1511733606975' style='position: relative'>
-                  <noscript>
-                    <a href='#'>
-                      <img alt='Volume per Day (BTC) ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vo&#47;VolumeperDayBTC&#47;Sheet2&#47;1_rss.png' style='border: none' />
-                    </a>
-                  </noscript>
-                  <object class='tableauViz'  style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='VolumeperDayBTC&#47;Sheet2' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vo&#47;VolumeperDayBTC&#47;Sheet2&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' />
-                  </object>
-                </div>
-              </div>
-              <div class="col-md-1">
-              </div>  
+      <div class="item active">
+        <h2 style="text-align: center;">Today's Trends!</h2>
+        <div class="container">   
+          <div class="row">  
+            <div class="col-md-1">
+            </div>     
+            <div class="col-md-5">
+              <div class='tableauPlaceholder' id='viz1511731443388' style='position: relative'>
+                <noscript>
+                  <a href='#'>
+                    <img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CryptoTradingRangebyMonth&#47;Sheet1&#47;1_rss.png' style='border: none' />
+                  </a>
+                </noscript>
+                <object class='tableauViz'  style='display:none;'>
+                  <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                  <param name='embed_code_version' value='3' />
+                  <param name='site_root' value='' />
+                  <param name='name' value='CryptoTradingRangebyMonth&#47;Sheet1' />
+                  <param name='tabs' value='no' />
+                  <param name='toolbar' value='yes' />
+                  <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CryptoTradingRangebyMonth&#47;Sheet1&#47;1.png' />
+                  <param name='animate_transition' value='yes' />
+                  <param name='display_static_image' value='yes' />
+                  <param name='display_spinner' value='yes' />
+                  <param name='display_overlay' value='yes' />
+                  <param name='display_count' value='yes' />
+                </object>
+              </div>   
             </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <h2 style="text-align: center;">Learn Things</h2>
-          <div class="container">
-            <div class="row">          
-              <div class="col-md-6" style=" padding: 10% 0;">
-                <div class="vertical-align">
-                  <p>Study Study Study!</p>
-                </div>
-                <p><a class="btn btn-default" href="#" role="button">Try Investing! &raquo;</a></p>
-              </div>
-              <div class="col-md-6">
-                <img src="css/images/library.png" alt="Los Angeles" style="width:100%;">
+            <div class="col-md-5">
+              <div class='tableauPlaceholder' id='viz1511733606975' style='position: relative'>
+                <noscript>
+                  <a href='#'>
+                    <img alt='Volume per Day (BTC) ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vo&#47;VolumeperDayBTC&#47;Sheet2&#47;1_rss.png' style='border: none' />
+                  </a>
+                </noscript>
+                <object class='tableauViz'  style='display:none;'>
+                  <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                  <param name='embed_code_version' value='3' />
+                  <param name='site_root' value='' />
+                  <param name='name' value='VolumeperDayBTC&#47;Sheet2' />
+                  <param name='tabs' value='no' />
+                  <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vo&#47;VolumeperDayBTC&#47;Sheet2&#47;1.png' />
+                  <param name='animate_transition' value='yes' />
+                  <param name='display_static_image' value='yes' />
+                  <param name='display_spinner' value='yes' />
+                  <param name='display_overlay' value='yes' />
+                  <param name='display_count' value='yes' />
+                </object>
               </div>
             </div>
+            <div class="col-md-1">
+            </div>  
           </div>
         </div>
+      </div>
 
-        <div class="item">
-          <h2 style="text-align: center;">Trending on Twitter!</h2>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6">
-                <img src="css/images/ipad.png" alt="Los Angeles" style="width:100%;">
-              </div>          
-              <div class="col-md-6">
-                <div class="twitter" style="position: absolute;">
-                  <p id="demo"></p>
-          <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
-            <a id = "twitterfeed";></a>
-          </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <div class="item">
+        <h2 style="text-align: center;">Learn Things</h2>
+        <div class="container">
+          <div class="row">          
+            <div class="col-md-6" style=" padding: 10% 0;">
+              <div class="vertical-align">
+                <p>Study Study Study!</p>
               </div>
-              </div>
+              <p><a class="btn btn-default" href="#" role="button">Try Investing! &raquo;</a></p>
             </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <h2 style="text-align: center;">Share Your Trading Story!</h2>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6">
-                <img src="css/images/friends.png" alt="Los Angeles" style="width:100%;">
-              </div>          
-              <div class="col-md-6" style=" padding: 10% 0;">
-                <p>Tell us your crypto-trading success story for a chance to be featured on our website!</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-              </div>
+            <div class="col-md-6">
+              <img src="{{ url_for('static', filename='images/library.png') }}" alt="Los Angeles" style="width:100%;">
             </div>
           </div>
         </div>
       </div>
 
-        <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+      <div class="item">
+        <h2 style="text-align: center;">Trending on Twitter!</h2>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="{{ url_for('static', filename='images/ipad.png') }}" alt="Los Angeles" style="width:100%;">
+            </div>          
+            <div class="col-md-6">
+              <div class="twitter" style="position: absolute;">
+                <p id="demo"></p>
+        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+          <a id = "twitterfeed";></a>
+        </blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="bio">
-        <div class="container" style="text-shadow: 5px 5px 5px black">
-          <h1>The Gurus</h1>
-          <div class="col-md-1">
-          </div> 
-          <div class="col-md-4">
-            <div class="personal-photo" style="-webkit-filter: drop-shadow(5px 5px 5px #222);">
-              <img src="css/images/john.png" height="200" width="200">
+      <div class="item">
+        <h2 style="text-align: center;">Share Your Trading Story!</h2>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="{{ url_for('static', filename='images/friends.png') }}" alt="Los Angeles" style="width:100%;">
+            </div>          
+            <div class="col-md-6" style=" padding: 10% 0;">
+              <p>Tell us your crypto-trading success story for a chance to be featured on our website!</p>
+              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div>
-            <h2>John Hall</h2>
-          </div> 
-          <div class="col-md-2">
-          </div> 
-          <div class="col-md-4"> 
-            <div class="personal-photo" style="-webkit-filter: drop-shadow(5px 5px 5px #222);"> 
-              <img src="css/images/brian.png" height="200" width="200">
-            </div>
-            <h2>Brian Heath</h2>
-          </div>                
-          <div class="col-md-1">
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
+      <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="bio">
+      <div class="container" style="text-shadow: 5px 5px 5px black">
+        <h1>The Gurus</h1>
+        <div class="col-md-1">
+        </div> 
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <div class="personal-photo" style="-webkit-filter: drop-shadow(5px 5px 5px #222);">
+            <img src="{{ url_for('static', filename='images/john.png') }}" height="200" width="200">
+          </div>
+          <h2>John Hall</h2>
+        </div> 
+        <div class="col-md-2">
+        </div> 
+        <div class="col-md-4"> 
+          <div class="personal-photo" style="-webkit-filter: drop-shadow(5px 5px 5px #222);"> 
+            <img src="{{ url_for('static', filename='images/brian.png') }}" height="200" width="200">
+          </div>
+          <h2>Brian Heath</h2>
+        </div>                
+        <div class="col-md-1">
         </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+     </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+  <hr class="featurette-divider">
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
       </div>
 
-      <hr>
+      <hr class="featurette-divider">
 
-    <hr class="featurette-divider">
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
+      <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
+        <div class="col-md-5 order-md-1">
+          <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
+      </div>
 
-        <hr class="featurette-divider">
+      <hr class="featurette-divider">
 
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
 
-     <hr class="featurette-divider">
+   <hr class="featurette-divider">
 
-      <footer>
-        <p>&copy; 2016 Company, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
+    <footer>
+      <p>&copy; 2016 Company, Inc.</p>
+    </footer>
+  </div> <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    	<script>
-		var xhttp = new XMLHttpRequest();
-		function loadDoc() {
-		  xhttp.onreadystatechange = function() {
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <!--script src="../../assets/js/ie10-viewport-bug-workaround.js"></script-->
+  <script>
+    var xhttp = new XMLHttpRequest();
+      function loadDoc() {
+        xhttp.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
 		      document.getElementById("demo").innerHTML =
 		      this.responseText;
@@ -338,5 +279,6 @@
  })(jQuery);
 }
   </script>
-  </body>
-</html>
+
+{% endblock %}
+
