@@ -2,6 +2,8 @@
 
 {% block content %}
 
+  <link href="css/jquery.feedback_me.css" rel="stylesheet" type="text/css" />
+
   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
       <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -278,6 +280,46 @@
          });
  })(jQuery);
 }
+  </script>
+
+  <script type="text/javascript">
+    
+    $(document).ready(function () {
+    //set up some minimal options for the feedback_me plugin
+    fm_options = {
+        show_email: true,
+        email_required: true,
+ 
+        show_radio_button_list: true,
+        radio_button_list_required: true,
+        radio_button_list_title: "How likely are you to recommend Feedback Me plugin to a friend?",
+ 
+        name_placeholder: "Name please",
+        email_placeholder: "Email goes here",
+        message_placeholder: "Go ahead, type your feedback here...",
+ 
+        name_required: true,
+        message_required: true,
+ 
+        show_asterisk_for_required: true,
+ 
+        feedback_url: "send_feedback_clean",
+ 
+        custom_params: {
+            csrf: "my_secret_token",
+            user_id: "john_doe",
+            feedback_type: "clean_complex"
+        },
+        delayed_options: {
+            delay_success_milliseconds: 3500,
+            send_success : "Sent successfully :)"
+        }
+    };
+ 
+    //init feedback_me plugin
+    fm.init(fm_options);
+ 
+});
   </script>
 
 {% endblock %}
