@@ -40,6 +40,11 @@ ul.nav {
 	font-stretch: 100px;
 }
 
+.dropdown {
+    width: 300px !important;
+    height: 400px !important;
+}
+
 .jumbotron h1 {
 	margin-top: 0px;
 	margin-bottom: 50px;
