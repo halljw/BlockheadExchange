@@ -12,114 +12,86 @@
  
 
     <div class="container">
-        
-        {% if result %}
-          <img src="data:image/png;base64,{{ result }}" width="500">
-        {% endif %}
+        <img src="data:image/png;base64,{{ result }}" width="600">
+        <form method="post" action="">
 
-          <!-- CURRENCY SELECTION -->
-          <form method="POST" action="">
-          <select name="currency" multiple="multiple" class="selectpicker form-control">
-            {% for currency in currencies %}
-              <option value="{{ currency }}">{{ currency }}</option>
-            {% endfor %}
-          </select>
+
           
 
+          <!-- ~~~~~~~~~~~~~~~~~~ -->
           <!-- DATE SELECTION -->
-          <label for="startDate">Starting Date</label><input type="date" id="startDate" name="startDate" value="2016-01-01"/>
-          <label for="endDate">Ending Date</label><input type="date" id="endDate" name="endDate" value="{{ cur_date }}"/>
-
+          <!-- ~~~~~~~~~~~~~~~~~~ -->
+          <div id="dates"> 
+            <label for="startDate" style="margin-right:10px;">Starting Date</label><input type="date" id="startDate" name="startDate" value="{{ start_date }}" style="margin-right:100px;">
+            <label for="endDate" style="margin-right:10px;">Ending Date</label><input type="date" id="endDate" name="endDate" value="{{ end_date }}" style="margin-bottom:10px;">
+          </div>
      
-          <!-- RANGE SELECTION -->
-          <!-- Keep around for selecting high/low limits -->
-          <!--input type="range" name="startYear" min="2000" max="{{ max_y }}" step="1" value="2016" onchange="showYearValue(this.value)">
-          <h4>
-            <span id="startYearDisplay">2016</span>
-          </h4>
-          <input type="range" name="startMonth" min="1" max="12" step="1" value="1" onchange="showMonthValue(this.value)">
-          <h4>
-            <span id="startMonthDisplay">1</span>
-          </h4>
-          <script type="text/javascript">
-            function showYearValue(newValue)
-            {
-              document.getElementById("startYearDisplay").innerHTML=newValue;
-            }
-            function showMonthValue(newValue)
-            {
-              document.getElementById("startMonthDisplay").innerHTML=newValue;
-            }
-          </script-->
 
-
+          <!-- ~~~~~~~~~~~~~~~~~~ -->
           <!-- NORMALIZE CHECKBOX -->
-          <div>
-            <input type="checkbox" id="normalizeCheck" name="normalize" value=True>
-              <label for="normalizeCheck">
-                <h3>Normalize data</h3>
+          <!-- ~~~~~~~~~~~~~~~~~~ -->
+          <div id="check_boxes" style="display: flex; flex-direction: row;">
+            {% if norm %}
+              <input type="checkbox" id="normalizeCheck" name="normalize" value=True checked style="margin-right:10px;">
+            {% else %}
+              <input type="checkbox" id="normalizeCheck" name="normalize" value=True style="margin-right:10px;">
+            {% endif %}
+              <label for="normalizeCheck" style="margin-right: 100px;">
+                Normalize data
               </label>
+
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <!-- ROLLING MEAN PLOT CHECKBOX -->
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            {% if rolling_mean %}
+              <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True checked style="margin-right:10px;">
+            {% else %}
+              <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True style="margin-right:10px;">
+            {% endif %}
+              <label for="rollingMeanCheck" style="margin-right:20px;">
+               Plot rolling mean
+              </label>
+
+            <!-- Range selection for rolling mean window -->
+            <input type="range" name="rm_window" min="1" max="200" step="1" value="{{ rm_window }}" onchange="showWindowValue(this.value)" style="width: 200px;">
+              <label id="rm_window_display">{{ rm_window }}</label>
+              <script type="text/javascript">
+                function showWindowValue(newValue)
+                {
+                document.getElementById("rm_window_display").innerHTML=newValue;
+                }
+              </script>
           </div>
 
-          <!-- ROLLING MEAN PLOT CHECKBOX -->
-          <div>
-            <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True>
-              <label for="rollingMeanCheck">
-                <h3>Plot rolling mean</h3>
-              </label>
-          </div>
-          <!-- ADD WINDOW SIZE FOR ROLLING MEAN PLOT CHECKBOX -->
+        <!-- ~~~~~~~~~~~~~~~~~~ -->
+        <!-- CURRENCY SELECTION -->
+        <!-- ~~~~~~~~~~~~~~~~~~ -->
+          <h3>Available Currencies</h3>
+          <select name="currency" multiple="multiple" class="selectpicker form-control" style="width: 475px; height: 150px; margin-bottom: .1cm;">
+            <!-- currencies available to plot -->
+            {% for currency in currencies %}
+              {% if currency in select %}
+                <option selected>{{ currency }}</option>
+              {% else %}
+                <option value="{{ currency }}">{{ currency }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+
           <!-- ADD RESTRICTION THAT ONLY ONE CURRENCY CAN BE SELECTED -->
           <!-- need to use javascript to enable/disable attribute -->
 
-
-        <!-- GRAPH BUTTON -->
-        <input type="submit" value="Graph" class="btn btn-default">
-
+        <!-- ~~~~~~~~~~~~ -->
+        <!-- GRAPH BUTTON/RESET BUTTON -->
+        <!-- ~~~~~~~~~~~~ -->
+        <input type="submit" class="btn btn-default btn-lg" value="Graph" style="margin-right:10px;">
+        <a class="btn btn-default btn-lg" href="/investment" role="button">Reset</a>
         </form>
 
 
 
 
-        <p><a class="btn btn-danger btn-lg" href="/" role="button">Reset &raquo;</a></p>
 
-
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Header</h2>
-          <p>TYPE HERE. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-6">
-          <h2>Header</h2>
-          <p>TYPE HERE</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Header</h2>
-          <p>TYPE HERE</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Header</h2>
-          <p>TYPE HERE</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Header</h2>
-          <p>TYPE HERE</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
-
-      <hr>
 
       <footer>
         <p>&copy; 2016 Company, Inc.</p>

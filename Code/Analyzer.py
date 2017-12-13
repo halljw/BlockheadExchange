@@ -15,10 +15,10 @@ import base64
 class Crypto_Currency_Analyzer:
 
   def __init__(self):
-    self.features = ["Open", "High", "Low", "Close", "Volume", "Market_Cap"]
+    self.features = ["OPEN", "HIGH", "LOW", "CLOSE", "VOL"]
     self.available_currencies = [c[:-4] for c in os.listdir('Data')]
 
-  def data_frame(self, feature="Open", currencies=None, start_date=None, end_date=None):
+  def data_frame(self, feature="OPEN", currencies=None, start_date=None, end_date=None):
     """
     Returns and sets a dataframe for the selected feature and currencies.
       Features:
@@ -30,9 +30,6 @@ class Crypto_Currency_Analyzer:
         - Market_cap
       Shows data for previous year as default.
     """
-    if not currencies:
-      raise ValueError("[-] Crypto_Currency_Analyzer.data_frame(currencies=[currencies])")
-
     # Desired dates; if none listed, past year as default
     if not start_date:
       start_date = self.date(1)
@@ -135,7 +132,8 @@ class Crypto_Currency_Analyzer:
 
   def plot_data_frame(self, title="Cryptocurrency values", show=False):
     """
-    Plot the given data frame.
+    Generates plot the given data frame.
+      - [show] Does not show plot by default. In order to show, show=True
     """
     p = self.df.plot(title=title, fontsize=12)
     p.set_xlabel("Date")
@@ -149,6 +147,18 @@ class Crypto_Currency_Analyzer:
     figdata_png = base64.b64encode(figfile.getvalue())
     return figdata_png
 
+  def empty_plot(self, title="Cryptocurrency values"):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    p = ax.plot([0], [0])
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Value')
+    ax.set_title(title)
+    figfile = BytesIO()
+    plt.savefig(figfile, format='png')
+    figfile.seek(0)
+    figdata_png = base64.b64encode(figfile.getvalue())
+    return figdata_png
 
   def daily_returns_histogram(self, df=pd.DataFrame(), currency=None):
     """
@@ -198,7 +208,7 @@ if __name__=='__main__':
   cca = Crypto_Currency_Analyzer()
   cca.data_frame(currencies=["Bitcoin"])
   cca.plot_data_frame(show=True)
-  cca.normalize()
+  cca.empty_plot()
   #cca.plot_rolling_mean(currency="Bitcoin")
   #cca.plot_rolling_mean(currency="Ethereum")
   #cca.daily_returns_histogram(currency="Bitcoin")
@@ -207,17 +217,3 @@ if __name__=='__main__':
 
   #df = cca.sharpe_ratio()
   #cca.plot_data_frame(df)
- 
-
-
-"""
-Next task, optimize a portfolio for a year of data,
-optimize based on sharpe ratio month by month
-
-provide a function to minimize
-provide an initial guess for x
-call the optimizer
-
-And fix the crawler
-
-""" 

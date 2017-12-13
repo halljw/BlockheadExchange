@@ -18,23 +18,26 @@ def landing():
 def investment():
   cca = Crypto_Currency_Analyzer()
 
-  ##########################################
-  # Feed today's date into HTML for calendar
-  ##########################################
-  # Get current date
-  date = datetime.datetime.now()
-  cur_date = '%04d-%02d-%02d' % (date.year, date.month, date.day)
+  # Get start/end dates
+  #  - default, previous 3 months
+  start_date = request.form.get('startDate')
+  end_date = request.form.get('endDate')
+  if not start_date:
+    date = datetime.datetime.now()
+    end_date = '%04d-%02d-%02d' % (date.year, date.month, date.day)
+    start_date = '%04d-%02d-%02d' % (date.year, date.month - 3, date.day)
 
-
-  """
   # Get currencies
   select = request.form.getlist('currency')
 
   # Normalize checkbox
   norm = request.form.get('normalize')
 
-  # Normalize checkbox
+  # Rolling mean checkbox
   rolling_mean = request.form.get('rollingMean')
+  rm_window = request.form.get('rm_window')
+  if not rm_window:
+    rm_window = 20
 
   # If user has pushed "Graph"
   if request.method == 'POST' and select:
@@ -48,14 +51,22 @@ def investment():
       cca.normalize()
 
     if rolling_mean:
-      result = cca.plot_rolling_mean(currency='Bitcoin')
+      result = cca.plot_rolling_mean(currency=select[0], window=int(rm_window))
     else:
       result = cca.plot_data_frame()
   else:
-    result = None
-  """
-  #return render_template('investment.html', result=result, currencies=cca.available_currencies, cur_date=cur_date)
-  return render_template('investment.html', result=None, currencies=cca.available_currencies, cur_date=cur_date)
+    cca.data_frame(currencies=['Bitcoin'], start_date=start_date)
+    result = cca.plot_data_frame()
+
+  return render_template('investment.html',
+			result=result, 
+			currencies=cca.available_currencies, 
+			start_date=start_date, 
+			end_date=end_date, 
+			select=select, 
+			norm=norm, 
+			rolling_mean=rolling_mean, 
+			rm_window=rm_window)
 
 if __name__=='__main__':
   app.run(debug=True)
