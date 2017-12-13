@@ -18,15 +18,15 @@ def landing():
 def investment():
   cca = Crypto_Currency_Analyzer()
 
-  """
-  ################################################################
-  # Feed today's date into HTML as max year/month for date sliders
-  ################################################################
+  ##########################################
+  # Feed today's date into HTML for calendar
+  ##########################################
   # Get current date
   date = datetime.datetime.now()
   cur_date = '%04d-%02d-%02d' % (date.year, date.month, date.day)
 
 
+  """
   # Get currencies
   select = request.form.getlist('currency')
 
@@ -55,7 +55,7 @@ def investment():
     result = None
   """
   #return render_template('investment.html', result=result, currencies=cca.available_currencies, cur_date=cur_date)
-  return render_template('investment.html', result=None, currencies=cca.available_currencies, cur_date=None)
+  return render_template('investment.html', result=None, currencies=cca.available_currencies, cur_date=cur_date)
 
 if __name__=='__main__':
   app.run(debug=True)

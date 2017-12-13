@@ -3,16 +3,20 @@
 {% block content %}
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-image: url(static/images/investment_background.jpeg)">
       <div class="container">
-        <h1>CryptoGuru Investment Analyzer</p>
-        <p><a class="btn btn-danger btn-lg" href="/" role="button">Reset &raquo;</a></p>
+        <h1>CryptoGuru Investment Analyzer</h1>
+        <h2>Invest like a Guru</h2>
       </div>
     </div>
  
 
     <div class="container">
         
+        {% if result %}
+          <img src="data:image/png;base64,{{ result }}" width="500">
+        {% endif %}
+
           <!-- CURRENCY SELECTION -->
           <form method="POST" action="">
           <select name="currency" multiple="multiple" class="selectpicker form-control">
@@ -76,9 +80,8 @@
 
 
 
-        {% if result %}
-          <img src="data:image/png;base64,{{ result }}" width="500">
-        {% endif %}
+
+        <p><a class="btn btn-danger btn-lg" href="/" role="button">Reset &raquo;</a></p>
 
 
       <!-- Example row of columns -->
