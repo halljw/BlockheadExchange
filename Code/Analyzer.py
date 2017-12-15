@@ -27,7 +27,6 @@ class Crypto_Currency_Analyzer:
         - Low
         - Close
         - Volume
-        - Market_cap
       Shows data for previous year as default.
     """
     # Desired dates; if none listed, past year as default

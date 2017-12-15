@@ -26,6 +26,61 @@
             <label for="endDate" style="margin-right:10px;">Ending Date</label><input type="date" id="endDate" name="endDate" value="{{ end_date }}" style="margin-bottom:10px;">
           </div>
      
+          <!-- ~~~~~~~~~~~~~~~~~~ -->
+          <!-- AVAILABLE FEATURES -->
+          <!-- ~~~~~~~~~~~~~~~~~~ -->
+          <div id="features", style="display: flex; flex-direction: row;">
+            <label style="margin-right: 30px;">
+              Currency feature:
+            </label>
+
+            {% if feature == "OPEN" %}
+              <input type="radio" name="features" id="open" value="OPEN" checked style="margin-right: 5px;">
+            {% else %}
+              <input type="radio" name="features" id="open" value="OPEN" style="margin-right: 5px;">
+            {% endif %}
+            <label for="open" style="margin-right: 10px;">
+              Open
+            </label>
+
+            {% if feature == "CLOSE" %}
+              <input type="radio" name="features" id="close" value="CLOSE" checked style="margin-right: 5px;">
+            {% else %}
+              <input type="radio" name="features" id="close" value="CLOSE" style="margin-right: 5px;">
+            {% endif %}
+            <label for="close" style="margin-right: 10px;">
+              Close
+            </label>
+
+            {% if feature == "HIGH" %}
+              <input type="radio" name="features" id="high" value="HIGH" checked style="margin-right: 5px;">
+            {% else %}
+              <input type="radio" name="features" id="high" value="HIGH" style="margin-right: 5px;">
+            {% endif %}
+            <label for="high" style="margin-right: 10px;">
+              High
+            </label>
+
+
+            {% if feature == "LOW" %}
+              <input type="radio" name="features" id="low" value="LOW" checked style="margin-right: 5px;">
+            {% else %}
+              <input type="radio" name="features" id="low" value="LOW" style="margin-right: 5px;">
+            {% endif %}
+            <label for="low" style="margin-right: 10px;">
+              Low
+            </label>
+
+
+            {% if feature == "VOL" %}
+              <input type="radio" name="features" id="volume" value="VOL" style="margin-right: 5px;">
+            {% else %}
+              <input type="radio" name="features" id="volume" value="VOL" style="margin-right: 5px;">
+            {% endif %}
+            <label for="volume" style="margin-right: 10px;">
+              Volume
+            </label>
+          </div>
 
           <!-- ~~~~~~~~~~~~~~~~~~ -->
           <!-- NORMALIZE CHECKBOX -->
