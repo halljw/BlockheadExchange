@@ -3,6 +3,7 @@
 from flask import Flask, render_template, request
 
 from Code.Analyzer import *
+from Twitter.twitter_searcher import *
 from os import listdir
 import datetime
 

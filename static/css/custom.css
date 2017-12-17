@@ -82,7 +82,6 @@ ul.nav {
 /*Carousel*/
 
 .carousel-inner {
-	/*background-color: lightgrey;*/
 	background-image: url('../images/BitCoin3.jpg');
 	background-size: cover;
 	height: 500px;
@@ -95,13 +94,22 @@ ul.nav {
 	padding-right: 100px;
 	padding-top: 25px;
 	-webkit-filter: drop-shadow(20px 20px 20px #222);
+	width: 100%;
 }
 
 .carousel-inner p {
 	text-align: center;
 }
 
+.carousel-inner h2 {
+	text-align: center !important;
+}
+
 /*Twitter*/
+
+.twitter {
+	position: absolute;
+}
 
 blockquote.twitter-tweet {
   display: inline-block;
@@ -167,7 +175,16 @@ blockquote.twitter-tweet a:focus {
 .platitudes p {
 	font-weight: bold !important;
 	font-size: 18px;
-	-webkit-filter: drop-shadow(20px 20px 20px #222) !important;
+	text-align: center; 
+	text-shadow: 5px 5px 5px black;
+}
+
+.bio h1 {
+	text-shadow: 5px 5px 5px black;
+}
+
+.bio img {
+	-webkit-filter: drop-shadow(5px 5px 5px #222);
 }
 
 /*Footer*/
