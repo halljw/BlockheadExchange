@@ -53,11 +53,21 @@ class Twitter_Searcher:
       self.access_secret, 
       self.consumer_key, 
       self.consumer_secret))
-    query = t.search.tweets(q="bitcoin", count=count)
 
-    output_query = query['statuses'][0]
+    while True:
+      query = t.search.tweets(q="bitcoin", count=count)
 
-    return output_query['user']['screen_name']
+      try:
+        #while (query['statuses'][0] == None) :
+        query = t.search.tweets(q="bitcoin", count=count)
+
+        output_query = query['statuses'][0]
+
+        return output_query['user']['screen_name']
+
+      except IndexError:
+        pass
+
 
   def id_getter(self, search_term='bitcoin', count=1):
     t = twitter.Twitter(auth = twitter.OAuth(
@@ -65,11 +75,19 @@ class Twitter_Searcher:
       self.access_secret, 
       self.consumer_key, 
       self.consumer_secret))
-    query = t.search.tweets(q="bitcoin", count=count)
+    while True:
+      query = t.search.tweets(q="bitcoin", count=count)
 
-    output_query = query['statuses'][0]
+      try:
+        #while (query['statuses'][0] == None) :
+        query = t.search.tweets(q="bitcoin", count=count)
 
-    return output_query['id']
+        output_query = query['statuses'][0]
+
+        return output_query['id']
+
+      except IndexError:
+        pass
 
 
 

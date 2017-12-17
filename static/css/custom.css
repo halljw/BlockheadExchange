@@ -99,10 +99,22 @@ ul.nav {
 
 .carousel-inner p {
 	text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #320000;
+  text-shadow: 0px 0px 5px lightgoldenrodyellow;
 }
 
 .carousel-inner h2 {
 	text-align: center !important;
+  font-weight: bold;
+  color: #320000;
+  text-shadow: 0px 0px 5px lightgoldenrodyellow;
+}
+
+.share-story a {
+  text-align: center !important;
+  text-shadow: 0px 0px 0px green;
 }
 
 /*Twitter*/
@@ -179,8 +191,12 @@ blockquote.twitter-tweet a:focus {
 	text-shadow: 5px 5px 5px black;
 }
 
-.bio h1 {
-	text-shadow: 5px 5px 5px black;
+.jumbotron h1 {
+	text-shadow: 5px 5px 5px black !important;
+}
+
+.jumbotron h2 {
+  text-shadow: 5px 5px 5px black !important;
 }
 
 .bio img {
