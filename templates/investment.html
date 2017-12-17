@@ -10,25 +10,27 @@
   </div>
 </div>
  
-<div class="container" style="display: flex; flex-direction: row;">
+<div class="investment-container" style="display: flex; flex-direction: row;">
 
   <!-- ~~~~~~~~~~~~~~~~~~ -->
   <!-- LEFT PANEL -->
   <!-- ~~~~~~~~~~~~~~~~~~ -->
-  <div class="container" id="left-panel">
-    <h2>Historical Data</h2>
-    <img src="data:image/png;base64,{{ result }}" width="600">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-6" id="left-panel">
+    <h1>Historical Data</h1>
+    <img src="data:image/png;base64,{{ result }}" width="auto" style="border:4px solid black; margin-bottom: 5px">
     <form method="post" action="">
 
       <!-- ~~~~~~~~~~~~~~~~~~ -->
       <!-- DATE SELECTION -->
       <!-- ~~~~~~~~~~~~~~~~~~ -->
-      <div id="dates" class="date_selection"> 
+      <div id="dates" class="date_selection" width="auto"> 
         <label for="startDate">
           Starting Date
         </label>
         <input type="date" id="startDate" name="startDate" value="{{ start_date }}">
-        <label for="endDate" style="margin-right:10px;">
+        <label for="endDate" style="margin-right:5px; margin-left: 120px;">
           Ending Date
         </label>
         <input type="date" id="endDate" name="endDate" value="{{ end_date }}">
@@ -120,7 +122,7 @@
         </label>
   
         <!-- Range selection for rolling mean window -->
-          <input type="range" name="rm_window" min="1" max="200" step="1" value="{{ rm_window }}" onchange="showWindowValue(this.value)" style="width: 200px;">
+          <input type="range" name="rm_window" min="1" max="200" step="1" value="{{ rm_window }}" onchange="showWindowValue(this.value)" style="width: auto;">
         <label id="rm_window_display">{{ rm_window }}</label>
         <script type="text/javascript">
           function showWindowValue(newValue)
@@ -136,7 +138,7 @@
       <div class="currency-select">
 
         <div>
-          <label style="margin-right: 200px;">Available Currencies</label>
+          <label style="margin-right: 260px;">Available Currencies</label>
           <label>Selected Currencies</label>
         </div>
 
@@ -169,16 +171,20 @@
       <!-- ~~~~~~~~~~~~ -->
       <!-- GRAPH BUTTON/RESET BUTTON -->
       <!-- ~~~~~~~~~~~~ -->
-      <input type="submit" class="btn btn-default btn-lg" value="Graph" style="margin-right:300px;">
-      <a class="btn btn-default btn-lg" href="/investment" role="button">Reset</a>
+      <input type="submit" class="btn btn-default btn-lg" value="Graph" style="margin-right:10%; background-color: green; color: white;">
+      <a class="btn btn-default btn-lg" href="/investment xx" role="button" style="margin-left:25%; background-color: red; color: white;">Reset</a>
     </form>
-  
   </div> <!-- End of left panel -->
  
+  <div class="col-md-2">
+  </div>
   <!-- RIGHT PANEL -->
-  <div class="container">
-    <h2>Investment Model</h2>
+  <div class="col-md-4" id="right-panel">
+    <h1>Investment Model</h1>
+    <h2>CHECK BACK SOON TO START INVESTING<h2>
   </div> <!-- /container -->
+  <div class="col-md-1">
+  </div>
 
 </div> <!-- /container -->
 

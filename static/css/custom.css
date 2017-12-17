@@ -200,32 +200,69 @@ blockquote.twitter-tweet a:focus {
 	color: lightgoldenrodyellow;
 }
 
+.jumbotron-investment {
+  text-align: center;
+  background-image: url('../images/investment_background.jpeg');
+  background-size: cover;
+  color: white;
+  margin-bottom: 0px;
+  text-shadow: 5px 5px 5px black;
+}
+
+.investment-container {
+  margin-left: auto;
+  margin-right: auto;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,.1) 0%,rgba(255,255,255,1) 100%), url('../images/BitCoin3.jpg');
+  background-size: cover;
+}
+
+
+.investment-container h1 {
+  font-family: 'Arvo', courier, serif;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
 .date_selection label {
   margin-right: 10px;
+  font-family: 'Arvo', courier, serif;
+  font-size: medium;
+  font-weight: bold;
 }
 
 .date_selection input {
-  width: 140px;
-  margin-right: 50px;
+  width: auto;
   margin-bottom: 10px;
 }
 
 .features {
   display: flex;
   flex-direction: row;
+  font-family: 'Arvo', courier, serif;
+  font-size: medium;
+  font-weight: bold;
 }
 
 .features input {
   margin-right: 5px;
+  font-family: 'Arvo', courier, serif;
 }
 
 .features label {
   margin-right: 10px;
+  font-family: 'Arvo', courier, serif;
+  font-size: medium;
+  font-weight: bold;
 }
 
 .checkboxes {
   display: flex;
   flex-direction: row;
+  font-family: 'Arvo', courier, serif;
+  font-weight: bold;
+  font-size: medium;
+  margin-bottom: 20px;
 }
 
 .checkboxes input {
@@ -235,15 +272,21 @@ blockquote.twitter-tweet a:focus {
 .current-select {
   display: flex;
   flex-direction: row;
+  font-family: 'Arvo', courier, serif;
+  font-weight: bold;
+  font-size: medium;
 }
 
 .current-select label{
+  font-family: 'Arvo', courier, serif;
   font-weight: bold;
+  font-size: large;
   
 }
 
 .currency-select select {
-  width: 200px;
+  width: 250px;
   height: 150px;
   margin-bottom: .1cm;
 }
+
