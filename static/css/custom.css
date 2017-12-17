@@ -11,6 +11,13 @@ body {
 	color: white;
 }
 
+.jumbotron-investment {
+	text-align: center;
+	background-image: url('../images/investment_background.jpeg');
+	background-size: cover;
+	color: white;
+}
+
 .btn-lg {
 	font-size: 36px;
 }
@@ -112,4 +119,52 @@ blockquote.twitter-tweet a:hover,
 
 blockquote.twitter-tweet a:focus {
   text-decoration: underline;
+}
+
+.date_selection label {
+  margin-right: 10px;
+}
+
+.date_selection input {
+  width: 140px;
+  margin-right: 50px;
+  margin-bottom: 10px;
+}
+
+.features {
+  display: flex;
+  flex-direction: row;
+}
+
+.features input {
+  margin-right: 5px;
+}
+
+.features label {
+  margin-right: 10px;
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkboxes input {
+  margin-right: 10px;
+}
+
+.current-select {
+  display: flex;
+  flex-direction: row;
+}
+
+.current-select label{
+  font-weight: bold;
+  
+}
+
+.currency-select select {
+  width: 200px;
+  height: 150px;
+  margin-bottom: .1cm;
 }
