@@ -2,127 +2,146 @@
 
 {% block content %}
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" style="background-image: url(static/images/investment_background.jpeg)">
-      <div class="container">
-        <h1>CryptoGuru Investment Analyzer</h1>
-        <h2>Invest like a Guru</h2>
-      </div>
-    </div>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron-investment" >
+  <div class="container">
+    <h1>CryptoGuru Investment Analyzer</h1>
+    <h2>Invest like a Guru</h2>
+  </div>
+</div>
  
+<div class="container" style="display: flex; flex-direction: row;">
 
-    <div class="container">
-        <img src="data:image/png;base64,{{ result }}" width="600">
-        <form method="post" action="">
+  <!-- ~~~~~~~~~~~~~~~~~~ -->
+  <!-- LEFT PANEL -->
+  <!-- ~~~~~~~~~~~~~~~~~~ -->
+  <div class="container" id="left-panel">
+    <h2>Historical Data</h2>
+    <img src="data:image/png;base64,{{ result }}" width="600">
+    <form method="post" action="">
 
-
-          
-
-          <!-- ~~~~~~~~~~~~~~~~~~ -->
-          <!-- DATE SELECTION -->
-          <!-- ~~~~~~~~~~~~~~~~~~ -->
-          <div id="dates"> 
-            <label for="startDate" style="margin-right:10px;">Starting Date</label><input type="date" id="startDate" name="startDate" value="{{ start_date }}" style="margin-right:100px;">
-            <label for="endDate" style="margin-right:10px;">Ending Date</label><input type="date" id="endDate" name="endDate" value="{{ end_date }}" style="margin-bottom:10px;">
-          </div>
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <!-- DATE SELECTION -->
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <div id="dates" class="date_selection"> 
+        <label for="startDate">
+          Starting Date
+        </label>
+        <input type="date" id="startDate" name="startDate" value="{{ start_date }}">
+        <label for="endDate" style="margin-right:10px;">
+          Ending Date
+        </label>
+        <input type="date" id="endDate" name="endDate" value="{{ end_date }}">
+      </div>
      
-          <!-- ~~~~~~~~~~~~~~~~~~ -->
-          <!-- AVAILABLE FEATURES -->
-          <!-- ~~~~~~~~~~~~~~~~~~ -->
-          <div id="features", style="display: flex; flex-direction: row;">
-            <label style="margin-right: 30px;">
-              Currency feature:
-            </label>
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <!-- AVAILABLE FEATURES -->
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <div id="features" class="features">
+        <label style="margin-right: 30px;">
+          Currency feature:
+        </label>
 
-            {% if feature == "OPEN" %}
-              <input type="radio" name="features" id="open" value="OPEN" checked style="margin-right: 5px;">
-            {% else %}
-              <input type="radio" name="features" id="open" value="OPEN" style="margin-right: 5px;">
-            {% endif %}
-            <label for="open" style="margin-right: 10px;">
-              Open
-            </label>
+        {% if feature == "OPEN" %}
+          <input type="radio" name="features" id="open" value="OPEN" checked>
+        {% else %}
+          <input type="radio" name="features" id="open" value="OPEN">
+        {% endif %}
+        <label for="open">
+          Open
+        </label>
 
-            {% if feature == "CLOSE" %}
-              <input type="radio" name="features" id="close" value="CLOSE" checked style="margin-right: 5px;">
-            {% else %}
-              <input type="radio" name="features" id="close" value="CLOSE" style="margin-right: 5px;">
-            {% endif %}
-            <label for="close" style="margin-right: 10px;">
-              Close
-            </label>
+        {% if feature == "CLOSE" %}
+          <input type="radio" name="features" id="close" value="CLOSE" checked>
+        {% else %}
+          <input type="radio" name="features" id="close" value="CLOSE">
+        {% endif %}
+        <label for="close">
+          Close
+        </label>
 
-            {% if feature == "HIGH" %}
-              <input type="radio" name="features" id="high" value="HIGH" checked style="margin-right: 5px;">
-            {% else %}
-              <input type="radio" name="features" id="high" value="HIGH" style="margin-right: 5px;">
-            {% endif %}
-            <label for="high" style="margin-right: 10px;">
-              High
-            </label>
-
-
-            {% if feature == "LOW" %}
-              <input type="radio" name="features" id="low" value="LOW" checked style="margin-right: 5px;">
-            {% else %}
-              <input type="radio" name="features" id="low" value="LOW" style="margin-right: 5px;">
-            {% endif %}
-            <label for="low" style="margin-right: 10px;">
-              Low
-            </label>
-
-
-            {% if feature == "VOL" %}
-              <input type="radio" name="features" id="volume" value="VOL" style="margin-right: 5px;">
-            {% else %}
-              <input type="radio" name="features" id="volume" value="VOL" style="margin-right: 5px;">
-            {% endif %}
-            <label for="volume" style="margin-right: 10px;">
-              Volume
-            </label>
-          </div>
-
-          <!-- ~~~~~~~~~~~~~~~~~~ -->
-          <!-- NORMALIZE CHECKBOX -->
-          <!-- ~~~~~~~~~~~~~~~~~~ -->
-          <div id="check_boxes" style="display: flex; flex-direction: row;">
-            {% if norm %}
-              <input type="checkbox" id="normalizeCheck" name="normalize" value=True checked style="margin-right:10px;">
-            {% else %}
-              <input type="checkbox" id="normalizeCheck" name="normalize" value=True style="margin-right:10px;">
-            {% endif %}
-              <label for="normalizeCheck" style="margin-right: 100px;">
-                Normalize data
-              </label>
-
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <!-- ROLLING MEAN PLOT CHECKBOX -->
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-            {% if rolling_mean %}
-              <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True checked style="margin-right:10px;">
-            {% else %}
-              <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True style="margin-right:10px;">
-            {% endif %}
-              <label for="rollingMeanCheck" style="margin-right:20px;">
-               Plot rolling mean
-              </label>
-
-            <!-- Range selection for rolling mean window -->
-            <input type="range" name="rm_window" min="1" max="200" step="1" value="{{ rm_window }}" onchange="showWindowValue(this.value)" style="width: 200px;">
-              <label id="rm_window_display">{{ rm_window }}</label>
-              <script type="text/javascript">
-                function showWindowValue(newValue)
-                {
-                document.getElementById("rm_window_display").innerHTML=newValue;
-                }
-              </script>
-          </div>
-
+        {% if feature == "HIGH" %}
+          <input type="radio" name="features" id="high" value="HIGH" checked>
+        {% else %}
+          <input type="radio" name="features" id="high" value="HIGH">
+        {% endif %}
+        <label for="high">
+          High
+        </label>
+  
+  
+        {% if feature == "LOW" %}
+          <input type="radio" name="features" id="low" value="LOW" checked>
+        {% else %}
+          <input type="radio" name="features" id="low" value="LOW">
+        {% endif %}
+        <label for="low">
+          Low
+        </label>
+  
+  
+       {% if feature == "VOL" %}
+         <input type="radio" name="features" id="volume" value="VOL" checked>
+       {% else %}
+         <input type="radio" name="features" id="volume" value="VOL">
+       {% endif %}
+       <label for="volume">
+         Volume
+       </label>
+      </div>
+  
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <!--     CHECKBOXES     -->
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <div id="check_boxes" class="checkboxes">
+    
         <!-- ~~~~~~~~~~~~~~~~~~ -->
-        <!-- CURRENCY SELECTION -->
+        <!-- NORMALIZE CHECKBOX -->
         <!-- ~~~~~~~~~~~~~~~~~~ -->
-          <h3>Available Currencies</h3>
-          <select name="currency" multiple="multiple" class="selectpicker form-control" style="width: 475px; height: 150px; margin-bottom: .1cm;">
+        {% if norm %}
+          <input type="checkbox" id="normalizeCheck" name="normalize" value=True checked>
+        {% else %}
+          <input type="checkbox" id="normalizeCheck" name="normalize" value=True>
+        {% endif %}
+        <label for="normalizeCheck" style="margin-right: 50px;">
+          Normalize Data
+        </label>
+  
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- ROLLING MEAN PLOT CHECKBOX -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        {% if rolling_mean %}
+          <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True checked class="cb">
+        {% else %}
+          <input type="checkbox" id="rollingMeanCheck" name="rollingMean" value=True class="cb">
+        {% endif %}
+        <label for="rollingMeanCheck" style="margin-right:20px;">
+          Plot rolling mean
+        </label>
+  
+        <!-- Range selection for rolling mean window -->
+          <input type="range" name="rm_window" min="1" max="200" step="1" value="{{ rm_window }}" onchange="showWindowValue(this.value)" style="width: 200px;">
+        <label id="rm_window_display">{{ rm_window }}</label>
+        <script type="text/javascript">
+          function showWindowValue(newValue)
+          {
+            document.getElementById("rm_window_display").innerHTML=newValue;
+          }
+        </script>
+      </div>
+  
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <!-- CURRENCY SELECTION -->
+      <!-- ~~~~~~~~~~~~~~~~~~ -->
+      <div class="currency-select">
+
+        <div>
+          <label style="margin-right: 200px;">Available Currencies</label>
+          <label>Selected Currencies</label>
+        </div>
+
+        <div>
+          <select name="currency" multiple="multiple" style="margin-right: 150px;">
             <!-- currencies available to plot -->
             {% for currency in currencies %}
               {% if currency in select %}
@@ -133,32 +152,47 @@
             {% endfor %}
           </select>
 
-          <!-- ADD RESTRICTION THAT ONLY ONE CURRENCY CAN BE SELECTED -->
-          <!-- need to use javascript to enable/disable attribute -->
+          <select name="selected_currencies" multiple="multiple">
+            <!-- currencies available to plot -->
+            {% for currency in select %}
+              <option value="{{ currency }}">{{ currency }}</option>
+             {% endfor %}
+          </select>
+        </div>
+             <!-- ADD RESTRICTION THAT ONLY ONE CURRENCY CAN BE SELECTED -->
+             <!-- need to use javascript to enable/disable attribute -->
 
-        <!-- ~~~~~~~~~~~~ -->
-        <!-- GRAPH BUTTON/RESET BUTTON -->
-        <!-- ~~~~~~~~~~~~ -->
-        <input type="submit" class="btn btn-default btn-lg" value="Graph" style="margin-right:10px;">
-        <a class="btn btn-default btn-lg" href="/investment" role="button">Reset</a>
-        </form>
-
-
-
-
-
-
-      <footer>
-        <p>&copy; 2016 Company, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
+             <!-- DOUBLE CLICK SHOULD MOVE AVAILABLE CURRENCY TO SELECTED CURRENCY -->
+      </div>  
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <!-- ~~~~~~~~~~~~ -->
+      <!-- GRAPH BUTTON/RESET BUTTON -->
+      <!-- ~~~~~~~~~~~~ -->
+      <input type="submit" class="btn btn-default btn-lg" value="Graph" style="margin-right:300px;">
+      <a class="btn btn-default btn-lg" href="/investment" role="button">Reset</a>
+    </form>
+  
+  </div> <!-- End of left panel -->
+ 
+  <!-- RIGHT PANEL -->
+  <div class="container">
+    <h2>Investment Model</h2>
+  </div> <!-- /container -->
+
+</div> <!-- /container -->
+
+
+
+<footer>
+  <p>&copy; 2016 Company, Inc.</p>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 
 {% endblock %}
