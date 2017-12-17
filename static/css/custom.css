@@ -1,22 +1,9 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
-  padding-bottom: 20px;
+  padding-top: 0px;
 }
 
-.jumbotron {
-	text-align: center;
-	background-image: url('../images/sea.jpeg');
-	background-size: cover;
-	color: white;
-}
-
-.jumbotron-investment {
-	text-align: center;
-	background-image: url('../images/investment_background.jpeg');
-	background-size: cover;
-	color: white;
-}
+/*General*/
 
 .btn-lg {
 	font-size: 36px;
@@ -26,9 +13,16 @@ ul.nav, .jumbotron h1 {
 	font-family: 'Arvo', courier, serif;
 }
 
-ul.nav {
-	font-size: 20px;
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one 🙂       */
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
 }
+
+/*Navbar*/
 
 .navbar {
 	background-color: darkred;
@@ -36,30 +30,58 @@ ul.nav {
 	padding-top: 10px;
 }
 
-.personal-photo {
-	padding: 20px;
-  -webkit-filter: drop-shadow(5px 5px 5px #222);
+ul.nav {
+	font-size: 20px;
+	background-color: darkred;
 }
 
-.navbar-brand a {
-	color: lightgoldenrodyellow;
-	font-size: 24px;
+.navbar-brand {
+	color: lightgoldenrodyellow !important;
+	font-size: 36px;
 	font-stretch: 100px;
+	font-family: 'Arvo', courier, serif;
 }
 
-.jumbotron h1 {
-	margin-top: 0px;
-	margin-bottom: 50px;
+.navbar-header img {
+	height: 50px; 
+	width: 50px; 
+	padding-bottom: 5px;
 }
 
-.jumbotron p {
-	margin-bottom: 30px;
-	font-weight: 100;
-	padding: 0 50px;
+.navbar-nav a {
+	color: lightgoldenrodyellow !important;
 }
+
+/*DropDown*/
+
+.input-group p {
+	margin: 0px;
+	display: inline-block;
+	color: lightgoldenrodyellow !important;
+}
+
+.input-group {
+	text-align: center !important;
+}
+
+.dropdown-menu {
+	background-color: darkred;
+	width: 400px;
+}
+
+.dropdown-object li {
+	height: 40px;
+}
+
+.dropdown-object-button li {
+	height: 40px;
+	padding-top: 5px;
+	position: relative;
+}
+
+/*Carousel*/
 
 .carousel-inner {
-	/*background-color: lightgrey;*/
 	background-image: url('../images/BitCoin3.jpg');
 	background-size: cover;
 	height: 500px;
@@ -72,18 +94,21 @@ ul.nav {
 	padding-right: 100px;
 	padding-top: 25px;
 	-webkit-filter: drop-shadow(20px 20px 20px #222);
+	width: 100%;
 }
 
 .carousel-inner p {
 	text-align: center;
 }
 
-.vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one 🙂       */
-  display: flex;
-  align-items: center;
-  vertical-align: middle;
+.carousel-inner h2 {
+	text-align: center !important;
+}
+
+/*Twitter*/
+
+.twitter {
+	position: absolute;
 }
 
 blockquote.twitter-tweet {
@@ -119,6 +144,60 @@ blockquote.twitter-tweet a:hover,
 
 blockquote.twitter-tweet a:focus {
   text-decoration: underline;
+}
+
+/*Who We Are*/
+
+.jumbotron {
+	text-align: center;
+	background-image: url('../images/sea.jpeg');
+	background-size: cover;
+	color: white;
+	margin-bottom: 0px;
+}
+
+.personal-photo {
+	padding: 20px;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+}
+
+.jumbotron h1 {
+	margin-top: 0px;
+	margin-bottom: 50px;
+}
+
+.jumbotron p {
+	margin-bottom: 30px;
+	font-weight: 100;
+	padding: 0 50px;
+}
+
+.platitudes p {
+	font-weight: bold !important;
+	font-size: 18px;
+	text-align: center; 
+	text-shadow: 5px 5px 5px black;
+}
+
+.bio h1 {
+	text-shadow: 5px 5px 5px black;
+}
+
+.bio img {
+	-webkit-filter: drop-shadow(5px 5px 5px #222);
+}
+
+/*Footer*/
+
+
+.resources {
+	background-color: darkgrey;
+	text-align: center;
+}
+
+.footer {
+	background-color: darkred;
+	color: lightgoldenrodyellow;
 }
 
 .date_selection label {
