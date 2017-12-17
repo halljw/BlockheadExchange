@@ -41,10 +41,29 @@
     });
   </script>
 
+  <script>
+    window.onload = function{
+      makeURL();
+    };
+    var joined = "pig";
+    var username = {{ handle_output }};
+    var tweetID = {{ id_output }};
+    function makeURL() {
+      var header = "https://twitter.com/";
+      var status = "/status/";
+      joined = header.concat(username).concat(status).concat(tweetID);
+      return joined;
+    }
+    document.getElementById("demo").innerHTML = "monkey";
+    var twitterbox = document.getElementById('twitterfeed');
+    twitterbox.setAttribute('href', joined)
+  </script>
+
 
   </head>
 
   <body>
+
 
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container-fluid">

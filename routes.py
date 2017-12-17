@@ -12,7 +12,14 @@ app = Flask(__name__)
 #  The main view of CryptoGuru Invemestment Analyzer
 @app.route('/', methods = ['GET', 'POST'])
 def landing():
-  return render_template('landing.html')
+    ts = Twitter_Searcher()
+    id_account = ts.id_getter()
+    handle_account = ts.handle_getter()
+    href_output = "https://twitter.com/" + str(handle_account) + "/status/" + str(id_account);
+    return render_template('landing.html',
+      href_hail_mary = href_output, 
+      id_output = id_account,
+      handle_output = handle_account)
 
 # The main view of CryptoGuru Invemestment Analyzer
 @app.route('/investment', methods = ['GET', 'POST'])
