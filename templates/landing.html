@@ -2,6 +2,7 @@
 
 {% block content %}
 
+  
   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
       <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -102,12 +103,12 @@
             <div class="col-md-6">
               <div class="twitter">
                 <p id="demo"></p>
+                <blockquote class="twitter-tweet" data-lang="en">
+                  <a href="{{href_hail_mary}}"></a>
+                </blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 <p> {{ id_output }} </p>
                 <p> {{ handle_output }} </p>
-        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
-          <a id = "twitterfeed";></a>
-        </blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             </div>
           </div>
@@ -240,38 +241,29 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
   <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+
+
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <!--script src="../../assets/js/ie10-viewport-bug-workaround.js"></script-->
-  <script>
-    var xhttp = new XMLHttpRequest();
-      function loadDoc() {
-        xhttp.onreadystatechange = function() {
-		    if (this.readyState == 4 && this.status == 200) {
-		      document.getElementById("demo").innerHTML =
-		      this.responseText;
-		    }
-		  };
-		  xhttp.open("GET", "test.txt", true);
-		  xhttp.send();
-		}
-	</script>
-	<script>
-		var joined;
-		var username = {{usernameFLASK}};
-		var tweetID = {{tweetIDFLASK}};
-		function makeURL() {
-			var header = "https://twitter.com/";
-			var status = "/status/";
-			joined = header.concat(username).concat(status).concat(tweetID);
-			return joined;
-		}
-		document.getElementById("demo").innerHTML = makeURL();
-		var twitterbox = document.getElementById('twitterfeed');
-		twitterbox.setAttribute('href', joined)
-	</script>
-  <script type='text/javascript'>                    var divElement = document.getElementById('viz1511733606975');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-</script>
-  <script type='text/javascript'>                    var divElement = document.getElementById('viz1511731443388');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+
+
+
+  <script type='text/javascript'>                   
+    var divElement = document.getElementById('viz1511733606975');                    
+    var vizElement = divElement.getElementsByTagName('object')[0];                    
+    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    
+    var scriptElement = document.createElement('script');                    
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+  </script>
+  <script type='text/javascript'>                    
+    var divElement = document.getElementById('viz1511731443388');                    
+    var vizElement = divElement.getElementsByTagName('object')[0];                    
+    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    
+    var scriptElement = document.createElement('script');                    
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
   </script>
   <script type="text/javascript">
     if (typeof jQuery != 'undefined' && typeof MooTools != 'undefined' ) {

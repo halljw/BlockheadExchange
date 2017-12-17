@@ -55,10 +55,9 @@ class Twitter_Searcher:
       self.consumer_secret))
     query = t.search.tweets(q="bitcoin", count=count)
 
-    for result in query['statuses']:
-      print("%s" % (result['user']['screen_name']))
-      print('\n')
-    return result['user']['screen_name']
+    output_query = query['statuses'][0]
+
+    return output_query['user']['screen_name']
 
   def id_getter(self, search_term='bitcoin', count=1):
     t = twitter.Twitter(auth = twitter.OAuth(
@@ -68,11 +67,9 @@ class Twitter_Searcher:
       self.consumer_secret))
     query = t.search.tweets(q="bitcoin", count=count)
 
-    for result in query['statuses']:
-      print("%s" % (result['id']))
-      print('\n')
+    output_query = query['statuses'][0]
 
-    return result ['id']
+    return output_query['id']
 
 
 
