@@ -1,7 +1,6 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
-  padding-bottom: 20px;
 }
 
 .jumbotron {
@@ -9,6 +8,7 @@ body {
 	background-image: url('../images/sea.jpeg');
 	background-size: cover;
 	color: white;
+	margin-bottom: 0px;
 }
 
 .btn-lg {
@@ -21,6 +21,7 @@ ul.nav, .jumbotron h1 {
 
 ul.nav {
 	font-size: 20px;
+	background-color: darkred;
 }
 
 .navbar {
@@ -71,12 +72,28 @@ ul.nav {
 	text-align: center;
 }
 
+.platitudes p {
+	font-weight: bolder !important;
+	font-size: 18px;
+	-webkit-filter: drop-shadow(20px 20px 20px #222) !important;
+}
+
+.resources {
+	background-color: darkgrey;
+	text-align: center;
+}
+
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one 🙂       */
   display: flex;
   align-items: center;
   vertical-align: middle;
+}
+
+.footer {
+	background-color: darkred;
+	color: lightgoldenrodyellow;
 }
 
 blockquote.twitter-tweet {
