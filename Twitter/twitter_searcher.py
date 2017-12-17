@@ -11,7 +11,7 @@ class Twitter_Searcher:
     """
     Gets authorization credentials from 'credentials.txt'
     """
-    cred_file = 'credentials.txt'
+    cred_file = 'Twitter/credentials.txt'
     try:
       f = open(cred_file, 'r')
     except IOError:
@@ -31,7 +31,7 @@ class Twitter_Searcher:
       print("[-] Issue while reading credentials\n[-] Run 'authorize.py to generate credentials")
       exit()
 
-  def search_twitter(self, search_term='bitcoin', count=15):
+  def search_twitter(self, search_term='bitcoin', count=1):
     """
     Conducts key-word search of twitter for 'search_term'
     Number of returned tweets <= 100
@@ -47,9 +47,40 @@ class Twitter_Searcher:
       print("(%s) @%s %s" % (result['created_at'], result['user']['screen_name'], result['text']))
       print('\n')
 
+  def handle_getter(self, search_term='bitcoin', count=1):
+    t = twitter.Twitter(auth = twitter.OAuth(
+      self.access_key, 
+      self.access_secret, 
+      self.consumer_key, 
+      self.consumer_secret))
+    query = t.search.tweets(q="bitcoin", count=count)
+
+    for result in query['statuses']:
+      print("%s" % (result['user']['screen_name']))
+      print('\n')
+    return result['user']['screen_name']
+
+  def id_getter(self, search_term='bitcoin', count=1):
+    t = twitter.Twitter(auth = twitter.OAuth(
+      self.access_key, 
+      self.access_secret, 
+      self.consumer_key, 
+      self.consumer_secret))
+    query = t.search.tweets(q="bitcoin", count=count)
+
+    for result in query['statuses']:
+      print("%s" % (result['id']))
+      print('\n')
+
+    return result ['id']
+
+
+
+
 
 
 if __name__=='__main__':
   ts = Twitter_Searcher()
-  ts.search_twitter()
+  ts.handle_getter()
+  ts.id_getter()
 
