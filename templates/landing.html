@@ -15,12 +15,13 @@
     <div class="carousel-inner">
       
       <div class="item active">
-        <h2 style="text-align: center;">Today's Trends!</h2>
+        <h2>Today's Trends!</h2>
         <div class="container">   
           <div class="row">  
             <div class="col-md-1">
             </div>     
             <div class="col-md-5">
+              <!-- From Tableau API, maintaining style formatting, chart 1 -->
               <div class='tableauPlaceholder' id='viz1511731443388' style='position: relative'>
                 <noscript>
                   <a href='#'>
@@ -41,9 +42,11 @@
                   <param name='display_overlay' value='yes' />
                   <param name='display_count' value='yes' />
                 </object>
+              <!-- Complete Tableau API code chart 1 -->
               </div>   
             </div>
             <div class="col-md-5">
+              <!-- From Tableau API, maintaining style formatting, chart 2 -->
               <div class='tableauPlaceholder' id='viz1511733606975' style='position: relative'>
                 <noscript>
                   <a href='#'>
@@ -64,6 +67,7 @@
                   <param name='display_count' value='yes' />
                 </object>
               </div>
+            <!-- Complete Tableau API code chart 2 -->
             </div>
             <div class="col-md-1">
             </div>  
@@ -72,7 +76,7 @@
       </div>
 
       <div class="item">
-        <h2 style="text-align: center;">Learn Things</h2>
+        <h2>Learn Things</h2>
         <div class="container">
           <div class="row">          
             <div class="col-md-6" style=" padding: 10% 0;">
@@ -82,21 +86,21 @@
               <p><a class="btn btn-default" href="#" role="button">Try Investing! &raquo;</a></p>
             </div>
             <div class="col-md-6">
-              <img src="{{ url_for('static', filename='images/library.png') }}" alt="Los Angeles" style="width:100%;">
+              <img src="{{ url_for('static', filename='images/library.png') }}" alt="Library">
             </div>
           </div>
         </div>
       </div>
 
       <div class="item">
-        <h2 style="text-align: center;">Trending on Twitter!</h2>
+        <h2>Trending on Twitter!</h2>
         <div class="container">
           <div class="row">
             <div class="col-md-6">
-              <img src="{{ url_for('static', filename='images/ipad.png') }}" alt="Los Angeles" style="width:100%;">
+              <img src="{{ url_for('static', filename='images/ipad.png') }}" alt="Twitter">
             </div>          
             <div class="col-md-6">
-              <div class="twitter" style="position: absolute;">
+              <div class="twitter">
                 <p id="demo"></p>
         <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
           <a id = "twitterfeed";></a>
@@ -109,15 +113,15 @@
       </div>
 
       <div class="item">
-        <h2 style="text-align: center;">Share Your Trading Story!</h2>
+        <h2>Share Your Trading Story!</h2>
         <div class="container">
           <div class="row">
             <div class="col-md-6">
-              <img src="{{ url_for('static', filename='images/friends.png') }}" alt="Los Angeles" style="width:100%;">
+              <img src="{{ url_for('static', filename='images/friends.png') }}" alt="Stories">
             </div>          
             <div class="col-md-6" style=" padding: 10% 0;">
               <p>Tell us your crypto-trading success story for a chance to be featured on our website!</p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+              <a class="btn btn-success" href="mailto: cryptogurus@gmail.com" role="button">Send us an email! &raquo;</a>
             </div>
           </div>
         </div>
@@ -139,12 +143,12 @@
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="bio">
-      <div class="container" style="text-shadow: 5px 5px 5px black">
+      <div class="container">
         <h1>The Gurus</h1>
         <div class="col-md-1">
         </div> 
         <div class="col-md-4">
-          <div class="personal-photo" style="-webkit-filter: drop-shadow(5px 5px 5px #222);">
+          <div class="personal-photo">
             <img src="{{ url_for('static', filename='images/john.png') }}" height="200" width="200">
           </div>
           <h2>John Hall</h2>
@@ -152,7 +156,7 @@
         <div class="col-md-2">
         </div> 
         <div class="col-md-4"> 
-          <div class="personal-photo" style="-webkit-filter: drop-shadow(5px 5px 5px #222);"> 
+          <div class="personal-photo"> 
             <img src="{{ url_for('static', filename='images/brian.png') }}" height="200" width="200">
           </div>
           <h2>Brian Heath</h2>
@@ -160,71 +164,71 @@
         <div class="col-md-1">
         </div>
       </div>
+      <div class="platitudes">
+        <br>
+        <br>
+        <br>
+        <p>
+          The world of cryptocurrencies introduces new trading opportunities to both the casual investor and the active day trader. We believe in demystifying the technical nuances of trading these currencies, and with our tools we aim to grow the population for whom cryptocurrencies make up a portion of their portfolio.
+        </p>
+        <br>
+        <p>
+          With our cutting edge investment tools, you can apply the technical trading strategies that have brought you success trading securities in the stock market to the world of crypto. We hope to provide a platform where traders can collaborate and share the techniques that have brough them success.
+        </p>
+        <br>
+        <p>
+          Please reach out to us with questions or opportunities. We enjoy interacting with new traders and we would *** the opportunity to build additional platforms that help you trade like a GURU!
+        </p>
+      </div>
     </div>
   </div>
 
-  <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+  <div class="resources">
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>CoinBase</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">Visit Coinbase &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>GDAX</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">Visit GDAX &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Bittrex</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#" role="button">Visit Bittrex &raquo;</a></p>
+        </div>
       </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-     </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+          <h2>Ethereum</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#" role="button">Visit Ethereum &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Ethereum</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#" role="button">Visit Ethereum &raquo;</a></p>
+        </div>
+        <div class="col-md-2">
+        </div>
       </div>
     </div>
+  </div>
 
-    <hr>
-
-  <hr class="featurette-divider">
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5 order-md-1">
-          <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-      </div>
-
-   <hr class="featurette-divider">
-
+  <div class="footer">
     <footer>
-      <p>&copy; 2016 Company, Inc.</p>
+      <div class="footer-text">
+        <p>&copy; Bloom Positivity Consulting, Inc.</p>
+      </div>
     </footer>
+  </div>
   </div> <!-- /container -->
 
 
