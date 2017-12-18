@@ -49,17 +49,17 @@ class Twitter_Searcher:
 
       query = t.search.tweets(q="bitcoin", count=count)	# conduct twitter seach
       hit = query['statuses'][0]				# Take top result
-      return (hit['user']['screen_name'], hit['id'])		# Return (tweet, user_id)
+      return (hit['id'], hit['user']['screen_name'])		# Return (tweet_id, user_name)
 
     except IndexError:
-      return (941913288186642, "FoxBusiness")
+      return (941913288186642432, "FoxBusiness")
 
     except twitter.api.TwitterHTTPError:
-      return (941913288186642, "FoxBusiness")
+      return (941913288186642432, "FoxBusiness")
 
     except:
       print('[-] Unknown error when accessing tweet')
-      return (941913288186642, "FoxBusiness")
+      return (941913288186642432, "FoxBusiness")
 
 
 
