@@ -14,7 +14,7 @@ app = Flask(__name__)
 def landing():
     ts = Twitter_Searcher()
     tweet_id, twitter_user = ts.get_tweet()
-    href_output = "https://twitter.com/" + str(tweet_id) + "/status/" + str(twitter_user);
+    href_output = "https://twitter.com/" + str(twitter_user) + "/status/" + str(tweet_id);
     return render_template('landing.html',
       href_hail_mary = href_output, 
       id_output = tweet_id,
