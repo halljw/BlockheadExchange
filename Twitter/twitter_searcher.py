@@ -69,6 +69,4 @@ class Twitter_Searcher:
 
 if __name__=='__main__':
   ts = Twitter_Searcher()
-  ts.handle_getter()
-  ts.id_getter()
-
+  print ts.get_tweet()
