@@ -68,6 +68,9 @@ class Twitter_Searcher:
       except IndexError:
         pass
 
+      except twitter.api.TwitterHTTPError:
+        return 941913288186642432
+
 
   def id_getter(self, search_term='bitcoin', count=1):
     t = twitter.Twitter(auth = twitter.OAuth(
@@ -88,6 +91,9 @@ class Twitter_Searcher:
 
       except IndexError:
         pass
+
+      except twitter.api.TwitterHTTPError:
+        'FoxBusiness';
 
 
 
