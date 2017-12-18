@@ -10,6 +10,8 @@ class Twitter_Searcher:
   def get_credentials(self):
     """
     Gets authorization credentials from 'credentials.txt'
+    Should be run upon construction in order to use credentials
+     when authorizing use of twitter api.
     """
     cred_file = 'Twitter/credentials.txt'
     try:
@@ -31,69 +33,34 @@ class Twitter_Searcher:
       print("[-] Issue while reading credentials\n[-] Run 'authorize.py to generate credentials")
       exit()
 
-  def search_twitter(self, search_term='bitcoin', count=1):
+  def get_tweet(self, search_term='bitcoin', count=1):
     """
     Conducts key-word search of twitter for 'search_term'
-    Number of returned tweets <= 100
+    Number of returned tweets must be <= 100. Searchs for 1 by default.
+    If exceeding max number of queries (15 queries per 15 minute period) or if
+      tweet fails to load, use default tweet as placeholder.
     """
-    t = twitter.Twitter(auth = twitter.OAuth(
-      self.access_key, 
-      self.access_secret, 
-      self.consumer_key, 
-      self.consumer_secret))
-    query = t.search.tweets(q="bitcoin", count=count)
+    try:
+      t = twitter.Twitter(auth = twitter.OAuth(
+        self.access_key, 
+        self.access_secret, 
+        self.consumer_key, 
+        self.consumer_secret))
 
-    for result in query['statuses']:
-      print("(%s) @%s %s" % (result['created_at'], result['user']['screen_name'], result['text']))
-      print('\n')
+      query = t.search.tweets(q="bitcoin", count=count)	# conduct twitter seach
+      hit = query['statuses'][0]				# Take top result
+      return (hit['user']['screen_name'], hit['id'])		# Return (tweet, user_id)
 
-  def handle_getter(self, search_term='bitcoin', count=1):
-    t = twitter.Twitter(auth = twitter.OAuth(
-      self.access_key, 
-      self.access_secret, 
-      self.consumer_key, 
-      self.consumer_secret))
+    except IndexError:
+      return (941913288186642, "FoxBusiness")
 
-    while True:
-      query = t.search.tweets(q="bitcoin", count=count)
+    except twitter.api.TwitterHTTPError:
+      return (941913288186642, "FoxBusiness")
 
-      try:
-        #while (query['statuses'][0] == None) :
-        query = t.search.tweets(q="bitcoin", count=count)
+    except:
+      print('[-] Unknown error when accessing tweet')
+      return (941913288186642, "FoxBusiness")
 
-        output_query = query['statuses'][0]
-
-        return output_query['user']['screen_name']
-
-      except IndexError:
-        pass
-
-      except twitter.api.TwitterHTTPError:
-        return 941913288186642432
-
-
-  def id_getter(self, search_term='bitcoin', count=1):
-    t = twitter.Twitter(auth = twitter.OAuth(
-      self.access_key, 
-      self.access_secret, 
-      self.consumer_key, 
-      self.consumer_secret))
-    while True:
-      query = t.search.tweets(q="bitcoin", count=count)
-
-      try:
-        #while (query['statuses'][0] == None) :
-        query = t.search.tweets(q="bitcoin", count=count)
-
-        output_query = query['statuses'][0]
-
-        return output_query['id']
-
-      except IndexError:
-        pass
-
-      except twitter.api.TwitterHTTPError:
-        'FoxBusiness';
 
 
 
