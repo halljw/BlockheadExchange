@@ -10,36 +10,44 @@
   </div>
 </div>
  
-<div class="investment-container" style="display: flex; flex-direction: row;">
+<div class="investment-container">
 
   <!-- ~~~~~~~~~~~~~~~~~~ -->
   <!-- LEFT PANEL -->
   <!-- ~~~~~~~~~~~~~~~~~~ -->
   <div class="col-md-1">
   </div>
-  <div class="col-md-6" id="left-panel">
+  <div class="col-md-5" id="left-panel">
     <h1>Historical Data</h1>
-    <img src="data:image/png;base64,{{ result }}" width="auto" style="border:4px solid black; margin-bottom: 5px">
+    <img src="data:image/png;base64,{{ result }}" style="margin: 5px; max-width:100%; height: auto;">
     <form method="post" action="">
 
       <!-- ~~~~~~~~~~~~~~~~~~ -->
       <!-- DATE SELECTION -->
       <!-- ~~~~~~~~~~~~~~~~~~ -->
-      <div id="dates" class="date_selection" width="auto"> 
-        <label for="startDate">
-          Starting Date
-        </label>
-        <input type="date" id="startDate" name="startDate" value="{{ start_date }}">
-        <label for="endDate" style="margin-right:5px; margin-left: 120px;">
-          Ending Date
-        </label>
-        <input type="date" id="endDate" name="endDate" value="{{ end_date }}">
+      <div class="date-selection">
+        <div id="dates" class="date_selection" width="auto"> 
+          <div class="start-items col-md-6">
+            <label for="startDate">
+              Starting Date
+            </label>
+            <input type="date" id="startDate" name="startDate" value="{{ start_date }}">
+          </div>
+        </div>
+        <div id="dates" class="date_selection" width="auto"> 
+          <div class="end-items col-md-6">
+            <label for="endDate">
+              Ending Date
+            </label>
+            <input type="date" id="endDate" name="endDate" value="{{ end_date }}">
+          </div>
+        </div>
       </div>
      
       <!-- ~~~~~~~~~~~~~~~~~~ -->
       <!-- AVAILABLE FEATURES -->
       <!-- ~~~~~~~~~~~~~~~~~~ -->
-      <div id="features" class="features">
+      <div id="features" class="features" style="padding: 5px;">
         <label style="margin-right: 30px;">
           Currency feature:
         </label>
@@ -137,13 +145,9 @@
       <!-- ~~~~~~~~~~~~~~~~~~ -->
       <div class="currency-select">
 
-        <div>
-          <label style="margin-right: 260px;">Available Currencies</label>
-          <label>Selected Currencies</label>
-        </div>
-
-        <div>
-          <select name="currency" multiple="multiple" style="margin-right: 150px;">
+        <div class="col-md-6">
+          <label>Available Currencies</label>
+          <select name="currency" multiple="multiple">
             <!-- currencies available to plot -->
             {% for currency in currencies %}
               {% if currency in select %}
@@ -153,7 +157,10 @@
               {% endif %}
             {% endfor %}
           </select>
+        </div>
 
+        <div class="col-md-6">
+          <label>Selected Currencies</label>
           <select name="selected_currencies" multiple="multiple">
             <!-- currencies available to plot -->
             {% for currency in select %}
@@ -171,8 +178,12 @@
       <!-- ~~~~~~~~~~~~ -->
       <!-- GRAPH BUTTON/RESET BUTTON -->
       <!-- ~~~~~~~~~~~~ -->
-      <input type="submit" class="btn btn-default btn-lg" value="Graph" style="margin-right:10%; background-color: green; color: white;">
-      <a class="btn btn-default btn-lg" href="/investment xx" role="button" style="margin-left:25%; background-color: red; color: white;">Reset</a>
+      <div class="col-md-6">
+        <input type="submit" class="btn btn-default btn-lg" value="Graph" style="background-color: green; color: white;">
+      </div>
+      <div class="col-md-6">
+        <a class="btn btn-default btn-lg" href="/investment xx" role="button" style="background-color: red; color: white;">Reset</a>
+      </div>
     </form>
   </div> <!-- End of left panel -->
  
@@ -180,19 +191,16 @@
   </div>
   <!-- RIGHT PANEL -->
   <div class="col-md-4" id="right-panel">
-    <h1>Investment Model</h1>
-    <h2>CHECK BACK SOON TO START INVESTING<h2>
+    <div class="maintenance">
+      <h1>Investment Model</h1>
+      <h2>CHECK BACK SOON TO START INVESTING<h2>
+    </div>
   </div> <!-- /container -->
   <div class="col-md-1">
   </div>
 
 </div> <!-- /container -->
 
-
-
-<footer>
-  <p>&copy; 2016 Company, Inc.</p>
-</footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
