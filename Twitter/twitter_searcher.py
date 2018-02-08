@@ -54,9 +54,6 @@ class Twitter_Searcher:
     except IndexError:
       return (941913288186642432, "FoxBusiness")
 
-    except twitter.api.TwitterHTTPError:
-      return (941913288186642432, "FoxBusiness")
-
     except:
       print('[-] Unknown error when accessing tweet')
       return (941913288186642432, "FoxBusiness")
@@ -69,4 +66,6 @@ class Twitter_Searcher:
 
 if __name__=='__main__':
   ts = Twitter_Searcher()
-  print ts.get_tweet()
+  ts.handle_getter()
+  ts.id_getter()
+

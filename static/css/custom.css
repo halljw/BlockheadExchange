@@ -291,40 +291,18 @@ blockquote.twitter-tweet a:focus {
   font-family: 'Arvo', courier, serif;
   font-weight: bold;
   font-size: medium;
-  display: inline-block;
-  align-items: center;
 }
 
 .current-select label{
   font-family: 'Arvo', courier, serif;
   font-weight: bold;
   font-size: large;
-  display: block;
-  text-align: center; 
+  
 }
 
 .currency-select select {
-  width: 100%;
+  width: 250px;
   height: 150px;
   margin-bottom: .1cm;
-}
-
-.maintenance {
-  text-align: center;
-  color: 
-}
-
-.start-items {
-  text-align: center;
-  align-items: center;
-  width: 50%;
-  margin: 0 auto;
-}
-
-.end-items {
-  text-align: center;
-  align-items: center;
-  width: 50%;
-  margin: 0 auto;
 }
 

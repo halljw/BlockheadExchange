@@ -32,9 +32,10 @@ def investment():
   start_date = request.form.get('startDate')
   end_date = request.form.get('endDate')
   if not start_date:
-    date = datetime.datetime.now()
-    end_date = '%04d-%02d-%02d' % (date.year, date.month, date.day)
-    start_date = '%04d-%02d-%02d' % (date.year, date.month - 3, date.day)
+    end_date = datetime.datetime.now()
+    start_date = datetime.datetime.now() - datetime.timedelta(days=90)
+    end_date = '%04d-%02d-%02d' % (end_date.year, end_date.month, end_date.day)
+    start_date = '%04d-%02d-%02d' % (start_date.year, start_date.month, start_date.day)
 
   ###############################
   # Get currencies
