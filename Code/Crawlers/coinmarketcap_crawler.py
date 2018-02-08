@@ -118,15 +118,9 @@ class Coin_Market_Cap_Spider:
         Creates list of currencies found on main page
         Crawls each currency page to create Currency object
         """
-        # a tag contains currencies
-        #  class="currency-name-display"
-        # href link to further details
-        for line in self.soup.findAll('a', class_="currency-name-container"):
-            self.currencies.append(Currency(line.text))
-
-        for c in self.currencies:
-          print c.name
-        exit()
+        # Creates currency objects from list of desired CURRENCIES
+        for currency in self.CURRENCIES:
+          self.currencies.append(Currency(currency))
 
         l = len(self.currencies)
         for i, currency in enumerate(self.currencies):
