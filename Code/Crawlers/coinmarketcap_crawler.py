@@ -3,10 +3,6 @@
 import sys, requests, urllib, json, csv, os, datetime
 from bs4 import BeautifulSoup as bs
 
-a = ['Bitcoin', 'Litecoin', 'Monero', 'Bitcoin-Cash', 'Bitcoin-Gold',
-     'Cardano', 'Dash', 'EOS', 'Ethereum-Classic', 'Ethereum', 'IOTA', 'NEM', 'NEO',
-     'Qtum', 'Ripple', 'Stellar-Lumens']
-
 class Currency:
 
     def __init__(self, name):
