@@ -2,10 +2,8 @@
 
 ## Authors
 
-[**John Hall**](https://www.halljw.com)  and [**Brian Heath**](brianheath.info)
-halljw.com
+[**John Hall**](http://www.halljw.com)  and [**Brian Heath**](http://www.brianheath.info)
 
-brianheath.info
 
 
 ## Synopsis
