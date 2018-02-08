@@ -3,6 +3,9 @@
 import sys, requests, urllib, json, csv, os, datetime
 from bs4 import BeautifulSoup as bs
 
+a = ['Bitcoin', 'Litecoin', 'Monero', 'Bitcoin-Cash', 'Bitcoin-Gold',
+     'Cardano', 'Dash', 'EOS', 'Ethereum-Classic', 'Ethereum', 'IOTA', 'NEM', 'NEO',
+     'Qtum', 'Ripple', 'Stellar-Lumens']
 
 class Currency:
 
@@ -99,6 +102,9 @@ class Coin_Market_Cap_Spider:
     Creates a list of Currency objects for each cryptocurrency on the site
     Crawls main page to find all available currencies; crawls each currency page
     """
+    CURRENCIES = ['Bitcoin', 'Litecoin', 'Monero', 'Bitcoin-Cash', 'Bitcoin-Gold',
+                  'Cardano', 'Dash', 'EOS', 'Ethereum-Classic', 'Ethereum', 'IOTA',
+                  'NEM', 'NEO', 'Qtum', 'Ripple', 'Stellar-Lumens']
 
     def __init__(self):
         self.url = "https://coinmarketcap.com/all/views/all"
@@ -117,6 +123,10 @@ class Coin_Market_Cap_Spider:
         # href link to further details
         for line in self.soup.findAll('a', class_="currency-name-container"):
             self.currencies.append(Currency(line.text))
+
+        for c in self.currencies:
+          print c.name
+        exit()
 
         l = len(self.currencies)
         for i, currency in enumerate(self.currencies):
