@@ -2,9 +2,17 @@
 
 ## Authors
 
-* **John Hall**  and **Brian Heath** *
+[**John Hall**](https://www.halljw.com)  and [**Brian Heath**](brianheath.info)
+halljw.com
+
+brianheath.info
+
 
 ## Synopsis
+We set out to build a website that would help individuals with technical trading experience in securities and bonds markets explore the world of cryptocurrencies. We recognized that there was an understandable apprehension for most traders when approaching cryptocurrencies, but we believed that with some practical tools, we could show that substantial parallels exist between trading securities and trading crypto. 
+
+
+The website primarily comprises a webapp implemented using Flask, the Python framework for web development. The functionality is divided between two pages: the landing page and Investment Analyzer page. The landing page contains the mission statement of the site, information on navigation, and live updates on tweets about Cryptocurrencies. The investment page provides tools for graphing and analyzing historical data on a selection of Cryptocurrencies.
 
 ## Getting Started
 
@@ -26,35 +34,28 @@ python Analyzer.py
 * Special thanks to coinmarketcap.com for publicly providing Cryptocurrency Market data
 
 
-Homework 6 - Project
-December 18, 2017
 
-CryptoGuru
-
-We set out to build a website that would help individuals with technical trading experience in securities and bonds markets explore the world of cryptocurrencies. We recognized that there was an understandable apprehension for most traders when approaching cryptocurrencies, but we believed that with some practical tools, we could show that substantial parallels exist between trading securities and trading crypto. 
-
-The website primarily comprises a webapp implemented using Flask, the Python framework for web development. The functionality is divided between two pages: the landing page and Investment Analyzer page. The landing page contains the mission statement of the site, information on navigation, and live updates on tweets about Cryptocurrencies. The investment page provides tools for graphing and analyzing historical data on a selection of Cryptocurrencies.
 
 The submission comprises the following file hierarchy:
 
-•	routes.py 
-•	templates/ 
-	◦	input_test.php 
-	◦	investment.html 
-	◦	landing.html 
-	◦	layout.html 
-•	static/ 
-	◦	css/ 
-		▪	bootstrap.min.css 
-		▪	bootstrap.min.css.map 
-		▪	carousel.css 
-		▪	custom.css 
-	◦	fonts/ 
-		▪	Glyphicons-halflings-regular.eot 
-		▪	Glyphicons-halflings-regular.svg 
-		▪	Glyphicons-halflings-regular.ttf 
-		▪	Glyphicons-halflings-regular.woff 
-		▪	glyphicons-halflings-regular.woff2 
+•	routes.py
+•	templates/
+	◦	input_test.php
+	◦	investment.html
+	◦	landing.html
+	◦	layout.html
+•	static/
+	◦	css/
+		▪	bootstrap.min.css
+		▪	bootstrap.min.css.map
+		▪	carousel.css
+		▪	custom.css
+	◦	fonts/
+		▪	Glyphicons-halflings-regular.eot
+		▪	Glyphicons-halflings-regular.svg
+		▪	Glyphicons-halflings-regular.ttf
+		▪	Glyphicons-halflings-regular.wof
+		▪	glyphicons-halflings-regular.woff 
 	◦	Images/ 
 	◦	js/ 
 		▪	Bootstrap.js 
@@ -127,4 +128,3 @@ Shared
 	•	Testing 
 	•	Hosting 
 
-Github Link: https://github.com/halljw/QuantitativeCryptocurrency
