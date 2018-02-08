@@ -1,7 +1,31 @@
 # BlockheadExchange
 
-## Subheading
-John Hall and Brian Heath
+## Authors
+
+* **John Hall**  and **Brian Heath** *
+
+## Synopsis
+
+## Getting Started
+
+### Gathering data
+
+```
+python coinmarketcap_crawler.py
+```
+
+### Displaying data
+
+```
+python Analyzer.py
+```
+
+## Acknowledgements
+
+* Thanks to Swapneel Sheth, without whom this project would not have started
+* Special thanks to coinmarketcap.com for publicly providing Cryptocurrency Market data
+
+
 Homework 6 - Project
 December 18, 2017
 
