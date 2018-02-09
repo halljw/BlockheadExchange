@@ -43,7 +43,7 @@ class Currency:
           - has up to date data (checks for day before today)
         Returns false otherwise
         """
-        path = os.path.abspath('..'+os.sep+'..'+os.sep+'Data'+os.sep+self.name+'.txt')
+        path = os.path.abspath('Data'+os.sep+self.name+'.txt')
         try:
             f = open(path, 'r')
         except IOError:
@@ -82,7 +82,7 @@ class Currency:
     def write_csv(self):
         self.reverse_lists()
         header = ["DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOL", "P", "R", "RINFO"]
-        path = os.path.abspath('..'+os.sep+'..'+os.sep+'Data'+os.sep+self.name+'.txt')
+        path = os.path.abspath('Data'+os.sep+self.name+'.txt')
         f = open(path, 'w')
         writer = csv.writer(f)
         writer.writerow(header)
