@@ -17,7 +17,7 @@ class Crypto_Currency_Analyzer:
 
   def __init__(self):
     self.features = ["OPEN", "HIGH", "LOW", "CLOSE", "VOL"]
-    self.available_currencies = [c[:-4] for c in os.listdir('../Data')]
+    self.available_currencies = [c[:-4] for c in os.listdir('Data')]
 
   def data_frame(self, feature="OPEN", currencies=None, start_date=None, end_date=None):
     """
@@ -46,7 +46,7 @@ class Crypto_Currency_Analyzer:
     # Join columns using 'DATE' as index
     # Rename feature to currency name
     for c in currencies:
-      df = df.join(pd.read_csv("../Data/"+c+".txt", index_col="DATE",
+      df = df.join(pd.read_csv("Data/"+c+".txt", index_col="DATE",
                                parse_dates=True, usecols=["DATE", feature],
                                na_values=["nan"]))
       df = df.rename(columns={feature: c})
