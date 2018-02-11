@@ -4,8 +4,10 @@ from flask import Flask, render_template, request
 
 from Code.Analyzer import *
 from Twitter.twitter_searcher import *
+from Code.landing_chart import *
 from os import listdir
 import datetime
+import urllib
 
 app = Flask(__name__)
 
@@ -15,10 +17,21 @@ def landing():
     ts = Twitter_Searcher()
     tweet_id, twitter_user = ts.get_tweet()
     href_output = "https://twitter.com/" + str(twitter_user) + "/status/" + str(tweet_id);
+
+    cc = ChartCreator()
+    currency_file = cc.find_largest_swing()
+    currency = cc.file_to_name(currency_file)
+    chart_left = cc.create_chart_ma(currency_file, currency, 'Data/Bitcoin.txt')
+    chart_right = cc.create_chart_pv(currency_file, currency, 'Data/Bitcoin.txt')
+
     return render_template('landing.html',
+      fig_left = chart_left,
+      fig_right = chart_right,
       href_hail_mary = href_output, 
       id_output = tweet_id,
       handle_output = twitter_user)
+
+
 
 # The main view of CryptoGuru Invemestment Analyzer
 @app.route('/investment', methods = ['GET', 'POST'])
