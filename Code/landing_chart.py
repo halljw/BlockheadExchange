@@ -3,6 +3,8 @@
 import csv
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.finance import candlestick_ohlc
 import matplotlib.dates as mdates
