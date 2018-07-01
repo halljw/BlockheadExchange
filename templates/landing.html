@@ -5,25 +5,25 @@
 {% block content %}
 
   
-  <div>
-    <div class="item active">
-      <h2>Hot Trends in the World of Crypto!</h2>
-      <div class="container">   
-        <div class="row">  
-          <div class="col-md-1">
-          </div>     
-          <div class="col-md-5">
-            <!-- From Tableau API, maintaining style formatting, chart 1 -->
-            <div class='chart-left' style='position: relative; text-align: center;'>
-              <img src="data:image/png;base64,{{ fig_left }}" style="padding: 20px;">
-            </div>  
-            <div class='chart-right' style='position: relative; text-align: center;'>
-              <img src="data:image/png;base64,{{ fig_right }}" style="padding: 20px;">
-            </div> 
-          </div>
-          <div class="col-md-6">
-          </div>
-        </div>
+  <div class="crypto">
+    <h2>Apply ML Algorithms to Current Trading Data!</h2>  
+    <div class="row">  
+      <div class="col-md-4">
+        <h3>
+          Today's Trends
+        </h3>
+        <!-- From Tableau API, maintaining style formatting, chart 1 -->
+        <div class='chart-left'>
+          <img src="data:image/png;base64,{{ fig_left }}" style="padding: 2px;">
+        </div>  
+        <div class='chart-right'>
+          <img src="data:image/png;base64,{{ fig_right }}" style="padding: 2px;">
+        </div> 
+      </div>
+      <div class="col-md-8">
+        <h3>
+          Test an Algorithm
+        </h3>
       </div>
     </div>
   </div>
@@ -57,15 +57,11 @@
         <br>
         <br>
         <p>
-          The world of cryptocurrencies introduces new trading opportunities to both the casual investor and the active day trader. We believe in demystifying the technical nuances of trading these currencies, and with our tools we aim to grow the population for whom cryptocurrencies make up a portion of their portfolio.
+          The world of cryptocurrencies introduces new trading opportunities to both the casual investor and the active day trader. We believe in demystifying the technical nuances of trading these currencies, and with our tool we hope to show that machine learning algorithms can help guide your trading strategy.
         </p>
         <br>
         <p>
-          With our cutting edge investment tools, you can apply the technical trading strategies that have brought you success trading securities in the stock market to the world of crypto. We hope to provide a platform where traders can collaborate and share the techniques that have brough them success.
-        </p>
-        <br>
-        <p>
-          Please reach out to us with questions or opportunities. We enjoy interacting with new traders and we would relish the opportunity to build additional platforms that help you trade like a BlockHead!
+          To use our tool, select a currency and a machine learning algorithm. You will be able to try KNN, Polynomial Regression, and *** along with the option of adding your own parameters.
         </p>
       </div>
     </div>
