@@ -27,7 +27,7 @@ class ChartCreator(object):
 		s3 = boto3.resource('s3')
 		bucket = 'blockhead-ex-01'
 		for currency in currency_list:
-			currency_file = 'Data/' + currency + '.txt'
+			currency_file = 'data/' + currency + '.txt'
 			s3.meta.client.download_file(bucket, "data/{}".format(currency), currency_file)
 			with open(currency_file, 'rb') as coin_file:
 				coin_array = np.genfromtxt(coin_file, delimiter=',', dtype=None)
