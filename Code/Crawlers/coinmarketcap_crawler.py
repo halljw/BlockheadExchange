@@ -134,7 +134,7 @@ class Coin_Market_Cap_Spider:
                 currency.write_csv()
                 s3 = boto3.resource('s3')
                 bucket = 'blockhead-ex-01'
-                s3.client.meta.uploadfile('Data/{}.txt'.format(currnecy.name), bucket, 'data/{}'.format(currency.name))
+                s3.meta.client.uploadfile('Data/{}.txt'.format(currnecy.name), bucket, 'data/{}'.format(currency.name))
                 print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
             except:
                 print("[-] %d/%d failed to crawl: %s" % (i+1, l, currency.name))
