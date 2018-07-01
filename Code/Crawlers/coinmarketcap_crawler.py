@@ -32,9 +32,12 @@ class Currency:
         y = datetime.date.today().year
         m = datetime.date.today().month
         d = datetime.date.today().day
+        if (d == 1):
+          m -= 1
+          d = 31
         if formatted:
-            return "%d-%d-%d" % (y, m, d-1)
-        return "%d%d%d" % (y, m, d-1)
+            return "%d-%02d-%02d" % (y, m, d-1)
+        return "%d%02d%d" % (y, m, d-1)
 
     def up_to_date(self):
         """
@@ -82,7 +85,7 @@ class Currency:
     def write_csv(self):
         self.reverse_lists()
         header = ["DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOL", "P", "R", "RINFO"]
-        path = os.path.abspath('../../Data'+os.sep+self.name+'.txt')
+        path = os.path.abspath('Data'+os.sep+self.name+'.txt')
         f = open(path, 'w')
         writer = csv.writer(f)
         writer.writerow(header)
@@ -142,7 +145,7 @@ class Coin_Market_Cap_Spider:
         soup = bs(html, "html.parser")
         history = [line.text.split('\n\n') for line in soup.findAll('tbody')]
 
-        # Occasionally hyphenated names drop the second in the url
+        # Occasionally hyphenated names, drop the second in the url
         if (not history):
             currency.url = currency.url.replace(currency.name, currency.name.split('-')[0])
             html = requests.get(currency.url).text
