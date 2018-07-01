@@ -12,6 +12,7 @@ import datetime as dt
 import matplotlib.ticker as ticker
 from io import BytesIO
 import base64
+import boto3
 
 class ChartCreator(object):
 	"""docstring for FileWork"""
@@ -23,8 +24,11 @@ class ChartCreator(object):
 		'Cardano', 'Dash', 'EOS', 'Ethereum-Classic', 'Ethereum', 'IOTA', 'NEM', 'NEO',
 		'Qtum', 'Ripple', 'Stellar-Lumens']
 		currency_dict = {}
+		s3 = boto3.reasource('s3')
+		bucket = 'blockhead-ex-01'
 		for currency in currency_list:
 			currency_file = 'Data/' + currency + '.txt'
+			s3.meta.client.download_file(bucket, "data/{}".format(currency), currency_file)
 			with open(currency_file, 'rb') as coin_file:
 				coin_array = np.genfromtxt(coin_file, delimiter=',', dtype=None)
 				compare_array_string = coin_array[-7::6]

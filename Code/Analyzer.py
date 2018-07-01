@@ -14,6 +14,7 @@ import os
 
 from io import BytesIO
 import base64
+import boto3
 
 class Crypto_Currency_Analyzer:
 
