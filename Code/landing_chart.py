@@ -24,7 +24,7 @@ class ChartCreator(object):
 		'Cardano', 'Dash', 'EOS', 'Ethereum-Classic', 'Ethereum', 'IOTA', 'NEM', 'NEO',
 		'Qtum', 'Ripple', 'Stellar-Lumens']
 		currency_dict = {}
-		s3 = boto3.reasource('s3')
+		s3 = boto3.resource('s3')
 		bucket = 'blockhead-ex-01'
 		for currency in currency_list:
 			currency_file = 'Data/' + currency + '.txt'
