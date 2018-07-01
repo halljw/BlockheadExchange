@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, requests, urllib, json, csv, os, datetime
+import sys, requests, urllib, json, csv, os, datetime, traceback
 from bs4 import BeautifulSoup as bs
 
 class Currency:
@@ -82,7 +82,7 @@ class Currency:
     def write_csv(self):
         self.reverse_lists()
         header = ["DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOL", "P", "R", "RINFO"]
-        path = os.path.abspath('Data'+os.sep+self.name+'.txt')
+        path = os.path.abspath('../../Data'+os.sep+self.name+'.txt')
         f = open(path, 'w')
         writer = csv.writer(f)
         writer.writerow(header)
@@ -131,6 +131,7 @@ class Coin_Market_Cap_Spider:
                 print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
             except:
                 print("[-] %d/%d failed to crawl: %s" % (i+1, l, currency.name))
+                print(traceback.format_exc())
                 self.failed_to_crawl.append(currency.name)
 
     def crawl_currency(self, currency):
