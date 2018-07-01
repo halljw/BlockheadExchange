@@ -117,8 +117,38 @@ class Crypto_Currency_Analyzer:
     figdata_png = base64.b64encode(figfile.getvalue())
     return figdata_png
 
+  def knn_test(self):
+    from sklearn import neighbors
+
+    dates = self.df['Bitcoin'].index.values
+    print dates 
+    y = self.df['Bitcoin'].tolist()
+    print y
+
+
+
+    n_neighbors = 5
+    weights = 'uniform'
+    knn = neighbors.KNeighborsRegressor(n_neighbors, weights=weights)
+
+    #X = self.df['Bitcoin']
+    #y_ = knn.fit(X, y).predict(T)
+
+    #plt.subplot(2, 1, i + 1)
+    #plt.scatter(X, y, c='k', label='data')
+    #plt.plot(T, y_, c='g', label='prediction')
+    #plt.axis('tight')
+    #plt.legend()
+    #plt.title("KNeighborsRegressor (k = %i, weights = '%s')" % (n_neighbors,
+    #                                                              weights))
+
+    #plt.show()
+
 
 if __name__=='__main__':
   cca = Crypto_Currency_Analyzer()
   cca.data_frame(currencies=["Bitcoin"])
-  cca.plot_data_frame(show=True)
+  #cca.plot_data_frame(show=True)
+
+  cca.knn_test()
+
