@@ -4,7 +4,7 @@ import sys, requests, urllib, json, csv, os, datetime, traceback
 import pandas as pd
 from bs4 import BeautifulSoup as bs
 import boto3
-from io import StringIO
+from io import BytesIO
 
 class Currency:
 
@@ -131,7 +131,7 @@ class Coin_Market_Cap_Spider:
                 currency.format_dates()
                 currency.cleanse_commas()
                 df = currency.make_df()
-                csv_buffer = StringIO()
+                csv_buffer = BytesIO()
                 df.to_csv(csv_buffer)
                 content = csv_buffer.getvalue()
                 client = boto3.client('s3', 
