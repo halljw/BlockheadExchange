@@ -135,9 +135,9 @@ class Coin_Market_Cap_Spider:
                 df.to_csv(csv_buffer)
                 content = csv_buffer.getvalue()
                 client = boto3.client('s3', 
-                    aws_access_key_id=AWS_ACCESS_KEY_ID, 
-                    aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
-                client.put_object(Bucket=S3_BUCKET_NAME, Key='{}.txt'.format(currency.name), Body=content)
+                    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], 
+                    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
+                client.put_object(Bucket=os.environ['S3_BUCKET_NAME'], Key='{}.txt'.format(currency.name), Body=content)
                 print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
             except:
                 print("[-] %d/%d failed to crawl: %s" % (i+1, l, currency.name))
