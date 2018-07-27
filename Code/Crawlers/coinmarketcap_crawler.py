@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import sys, requests, urllib, json, csv, os, datetime, traceback
+import pandas as pd
 from bs4 import BeautifulSoup as bs
 import boto3
+from io import StringIO
 
 class Currency:
 
@@ -86,7 +88,7 @@ class Currency:
     def write_csv(self):
         self.reverse_lists()
         header = ["DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOL", "P", "R", "RINFO"]
-        path = os.path.abspath('Data'+os.sep+self.name+'.txt')
+        path = os.path.abspath('../../Data'+os.sep+self.name+'.txt')
         f = open(path, 'w')
         writer = csv.writer(f)
         writer.writerow(header)
@@ -132,10 +134,21 @@ class Coin_Market_Cap_Spider:
                 currency.format_dates()
                 currency.cleanse_commas()
                 currency.write_csv()
-                s3 = boto3.resource('s3')
-                bucket = 'blockhead-ex-01'
-                s3.meta.client.uploadfile('Data/{}.txt'.format(currnecy.name), bucket, 'data/{}'.format(currency.name))
-                print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
+                with open('../../Data/{}.txt'.format(currency.name)) as f:
+                    csv_buffer = StringIO()
+                    df = pd.read_csv(f)
+                    df.to_csv(csv_buffer)
+                    content = csv_buffer.getvalue()
+                # s3 = boto3.resource('s3')
+                # bucket = 'blockhead-ex-01'
+                # s3.Object('../../Data/{}.txt'.format(currency.name), bucket, 'data/{}'.format(currency.name))
+                # df.to_csv('s3://blockhead-ex-02/{}.txt'.format(currency.name))
+                    client = boto3.client('s3', 
+                        aws_access_key_id=AWS_ACCESS_KEY_ID, 
+                        aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+                # k = "folder/subfolder"+filename
+                    client.put_object(Bucket=S3_BUCKET_NAME, Key='{}.txt'.format(currency.name), Body=content)
+                    print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
             except:
                 print("[-] %d/%d failed to crawl: %s" % (i+1, l, currency.name))
                 print(traceback.format_exc())
