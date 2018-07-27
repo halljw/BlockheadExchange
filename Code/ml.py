@@ -66,12 +66,12 @@ class ML:
             next_unix += one_day
             df.loc[next_date] = [np.nan for _ in range(len(df.columns) - 1)] + [i]
 
-
-class Draw:
-    style.use('ggplot')
-    df['Adj. Close'].ppylot()
-    df['Forecast'].plot()
-    plt.legend(loc=4)
-    plt.xlabel('Date')
-    plt.ylabel('Price')
-    plt.show()
+#
+# class Draw:
+#     style.use('ggplot')
+#     df['Adj. Close'].ppylot()
+#     df['Forecast'].plot()
+#     plt.legend(loc=4)
+#     plt.xlabel('Date')
+#     plt.ylabel('Price')
+#     plt.show()
