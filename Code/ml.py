@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import pandas as pd
-import quandl
 import math
 import datetime
 import numpy as np
@@ -70,7 +69,7 @@ class ML:
 
 class Draw:
     style.use('ggplot')
-    df['Adj. Close'].plot()
+    df['Adj. Close'].ppylot()
     df['Forecast'].plot()
     plt.legend(loc=4)
     plt.xlabel('Date')
