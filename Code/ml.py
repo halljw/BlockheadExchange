@@ -20,7 +20,7 @@ class ML:
                               aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
                               aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
         client.get_object(Bucket=os.environ['S3_BUCKET_NAME'], Key='{}.txt'.format(currency))
-        df = pd.read_csv(io.BytesIO(obj['Body'].read()))
+        df = pd.read_csv(BytesIO(obj['Body'].read()))
         df['HL_PCT'] = (df['HIGH'] - df['LOW']) / df['LOW']
         df['PCT_CHANGE'] = (df['CLOSE'] - df['OPEN']) / df['OPEN']
         df = df[['CLOSE', 'HL_PCT', 'PCT_CHANGE', 'VOL']]
