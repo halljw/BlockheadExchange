@@ -130,7 +130,7 @@ class Coin_Market_Cap_Spider:
                 self.crawl_currency(currency)
                 currency.format_dates()
                 currency.cleanse_commas()
-                df = currency.write_df()
+                df = currency.make_df()
                 csv_buffer = StringIO()
                 df.to_csv(csv_buffer)
                 content = csv_buffer.getvalue()
