@@ -11,6 +11,7 @@ from sklearn.linear_model import LinearRegression
 import pickle
 import boto3
 from io import BytesIO
+import os
 
 
 class ML:
