@@ -26,6 +26,7 @@ class ML:
         df = df[['CLOSE', 'HL_PCT', 'PCT_CHANGE', 'VOL']]
         forecast_col = 'CLOSE'
         df.fillna(-99999, inplace=True)
+        df = df.replace('-', -99999)
 
         forecast_out = int(math.ceil(0.01 * len(df)))
         df['label'] = df[forecast_col].shift(-forecast_out)
