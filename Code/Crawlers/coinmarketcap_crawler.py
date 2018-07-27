@@ -90,8 +90,8 @@ class Currency:
         header = ["DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOL", "P", "R", "RINFO"]
         df = pd.DataFrame(columns=header)
         for d, o, h, l, c, v in zip(self.dates, self.opens, self.highs, self.lows, self.closes, self.volumes):
-            row = pd.DataFrame([d, o, h, l, c, v, 0, 0, 0], columns=header)
-            writer.writerow(row)
+            row = pd.DataFrame([[d, o, h, l, c, v, 0, 0, 0]], columns=header)
+            df = df.append(row)
         return df
 
 
