@@ -7,7 +7,7 @@ import numpy as np
 from sklearn import preprocessing, cross_validation, svm
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-from matplotlib import style
+# from matplotlib import style
 import pickle
 import boto3
 from io import BytesIO
