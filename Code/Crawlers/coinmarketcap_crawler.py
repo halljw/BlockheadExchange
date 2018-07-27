@@ -85,17 +85,14 @@ class Currency:
         self.volumes = [self.remove_commas(v) for v in self.volumes]
         self.market_caps = [self.remove_commas(m) for m in self.market_caps]
 
-    def write_csv(self):
+    def make_df(self):
         self.reverse_lists()
         header = ["DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOL", "P", "R", "RINFO"]
-        path = os.path.abspath('../../Data'+os.sep+self.name+'.txt')
-        f = open(path, 'w')
-        writer = csv.writer(f)
-        writer.writerow(header)
+        df = pd.DataFrame(columns=header)
         for d, o, h, l, c, v in zip(self.dates, self.opens, self.highs, self.lows, self.closes, self.volumes):
-            row = [d, o, h, l, c, v, 0, 0, 0]
+            row = pd.DataFrame([d, o, h, l, c, v, 0, 0, 0], columns=header)
             writer.writerow(row)
-        f.close()
+        return df
 
 
 class Coin_Market_Cap_Spider:
@@ -133,22 +130,15 @@ class Coin_Market_Cap_Spider:
                 self.crawl_currency(currency)
                 currency.format_dates()
                 currency.cleanse_commas()
-                currency.write_csv()
-                with open('../../Data/{}.txt'.format(currency.name)) as f:
-                    csv_buffer = StringIO()
-                    df = pd.read_csv(f)
-                    df.to_csv(csv_buffer)
-                    content = csv_buffer.getvalue()
-                # s3 = boto3.resource('s3')
-                # bucket = 'blockhead-ex-01'
-                # s3.Object('../../Data/{}.txt'.format(currency.name), bucket, 'data/{}'.format(currency.name))
-                # df.to_csv('s3://blockhead-ex-02/{}.txt'.format(currency.name))
-                    client = boto3.client('s3', 
-                        aws_access_key_id=AWS_ACCESS_KEY_ID, 
-                        aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
-                # k = "folder/subfolder"+filename
-                    client.put_object(Bucket=S3_BUCKET_NAME, Key='{}.txt'.format(currency.name), Body=content)
-                    print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
+                df = currency.write_df()
+                csv_buffer = StringIO()
+                df.to_csv(csv_buffer)
+                content = csv_buffer.getvalue()
+                client = boto3.client('s3', 
+                    aws_access_key_id=AWS_ACCESS_KEY_ID, 
+                    aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+                client.put_object(Bucket=S3_BUCKET_NAME, Key='{}.txt'.format(currency.name), Body=content)
+                print("[+] %d/%d Crawled: %s" % (i+1, l, currency.name))
             except:
                 print("[-] %d/%d failed to crawl: %s" % (i+1, l, currency.name))
                 print(traceback.format_exc())
