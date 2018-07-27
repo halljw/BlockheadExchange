@@ -75,3 +75,6 @@ class ML:
 #     plt.xlabel('Date')
 #     plt.ylabel('Price')
 #     plt.show()
+
+if __name__=='__main__':
+    ml = ML()
