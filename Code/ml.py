@@ -57,7 +57,7 @@ class ML:
         print(forecast_set, accuracy, forecast_out)
 
         df['Forecast'] = np.nan
-        df.show()
+        print(df)
         last_date = df.iloc[-1].name
         last_unix = last_date.timestamp()
         one_day = 86400
