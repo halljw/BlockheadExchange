@@ -5,13 +5,14 @@ import math
 import datetime
 import numpy as np
 from sklearn import preprocessing, cross_validation, svm
-from sklearn.linear_model import LinearRegression
-# import matplotlib.pyplot as plt
-# from matplotlib import style./
+from sklearn.linear_model import LinearRegression, Lars, BayesianRidge
+import matplotlib.pyplot as plt
+from matplotlib import style
 import pickle
 import boto3
 from io import BytesIO
 import os
+import base64
 
 
 class ML:
@@ -28,7 +29,10 @@ class ML:
         df.fillna(-99999, inplace=True)
         df = df.replace('-', -99999)
 
-        forecast_out = int(math.ceil(0.01 * len(df)))
+        max_forecast = int(math.ceil(0.1 * len(df)))
+        if forecast_out > max_forecast:
+            print("Tone it down! We should only extrapolate 10\%!")
+            forecast_out = max_forecast
         df['label'] = df[forecast_col].shift(-forecast_out)
 
         X = np.array(df.drop(['label'], 1))
@@ -45,20 +49,14 @@ class ML:
         clf = algorithm()
         clf.fit(X_train, y_train)
 
-        # with open('linearregression.pickle', 'wb') as f:
-        #     pickle.dump(clf, f)
-        #
-        # pickle_in = open('linearregression.pickle', 'rb')
-        # clf = pickle.load(pickle_in)
-
         accuracy = clf.score(X_test, y_test)
 
         forecast_set = clf.predict(X_lately)
         print(forecast_set, accuracy, forecast_out)
 
         df['Forecast'] = np.nan
-        print(df)
         last_date = df.iloc[-1].name
+        print (last_date)
         last_unix = last_date.timestamp()
         one_day = 86400
         next_unix = last_unix + one_day
@@ -68,15 +66,25 @@ class ML:
             next_unix += one_day
             df.loc[next_date] = [np.nan for _ in range(len(df.columns) - 1)] + [i]
 
-#
-# class Draw:
-#     style.use('ggplot')
-#     df['Adj. Close'].ppylot()
-#     df['Forecast'].plot()
-#     plt.legend(loc=4)
-#     plt.xlabel('Date')
-#     plt.ylabel('Price')
-#     plt.show()
+
+        style.use('ggplot')
+        self.draw(df)
+
+    def draw(self, df):
+        df['CLOSE'].plot()
+        df['Forecast'].plot()
+        plt.legend(loc=4)
+        plt.xlabel('Date')
+        plt.ylabel('Price')
+
+        fig = BytesIO()
+        plt.tight_layout()
+        plt.savefig('plot.png')
+        plt.savefig(fig, format='png')
+        fig.seek(0)
+        fig_png = base64.b64encode(fig.getvalue())
+
+        return fig
 
 if __name__=='__main__':
-    ml = ML()
+    ml = ML(algorithm=BayesianRidge)

@@ -71,7 +71,7 @@ class Currency:
             m = MONTHS[date.split()[0]]
             d = self.remove_commas(date.split()[1])
             y = date.split()[2]
-            new_dates.append(y+m+d)
+            new_dates.append(m+'/'+d+'/'+y)
         self.dates = new_dates
 
     def remove_commas(self, line):
