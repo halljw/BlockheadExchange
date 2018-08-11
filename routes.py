@@ -14,15 +14,15 @@ app = Flask(__name__)
 #  The main view of CryptoGuru Invemestment Analyzer
 @app.route('/', methods = ['GET', 'POST'])
 def landing():
-    ts = Twitter_Searcher()
-    tweet_id, twitter_user = ts.get_tweet()
-    href_output = "https://twitter.com/" + str(twitter_user) + "/status/" + str(tweet_id);
+    # ts = Twitter_Searcher()
+    # tweet_id, twitter_user = ts.get_tweet()
+    # href_output = "https://twitter.com/" + str(twitter_user) + "/status/" + str(tweet_id);
 
-    cc = ChartCreator()
-    currency_file = cc.find_largest_swing()
-    currency = cc.file_to_name(currency_file)
-    chart_left = cc.create_chart_ma(currency_file, currency, 'Data/Bitcoin.txt')
-    chart_right = cc.create_chart_pv(currency_file, currency, 'Data/Bitcoin.txt')
+    # cc = ChartCreator()
+    # currency_file = cc.find_largest_swing()
+    # currency = cc.file_to_name(currency_file)
+    # chart_left = cc.create_chart_ma(currency_file, currency, 'Data/Bitcoin.txt')
+    # chart_right = cc.create_chart_pv(currency_file, currency, 'Data/Bitcoin.txt')
 
     return render_template('landing.html',
       fig_left = chart_left,
