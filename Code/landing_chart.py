@@ -26,6 +26,8 @@ class ChartCreator(object):
 		currency_dict = {}
 		s3 = boto3.resource('s3')
 		bucket = 'blockhead-ex-01'
+		for s3_file in s3.Bucket(bucket).objects.all():
+    		print(s3_file.key)
 		for currency in currency_list:
 			currency_file = 'data/' + currency + '.txt'
 			s3.meta.client.download_file(bucket, "{}.txt".format(currency), currency_file)
