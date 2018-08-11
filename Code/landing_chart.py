@@ -28,9 +28,9 @@ class ChartCreator(object):
 		bucket = 'blockhead-ex-01'
 		for currency in currency_list:
 			currency_file = 'data/' + currency + '.txt'
-			x = s3.meta.client.download_file(bucket, "{}.txt".format(currency), currency_file)
+			s3.meta.client.download_file(bucket, "{}.txt".format(currency), currency_file)
 			with open(currency_file, 'rb') as coin_file:
-				coin_array = np.genfromtxt(x, delimiter=',', dtype=None)
+				coin_array = np.genfromtxt(coin_file, delimiter=',', dtype=None)
 				compare_array_string = coin_array[-7::6]
 				compare_array = compare_array_string.astype(np.float)
 				vol_diff = (compare_array[0][5] - compare_array[1][5]) / ((compare_array[0][5] + compare_array[1][5]) / 2)
