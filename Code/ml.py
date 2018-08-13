@@ -13,6 +13,7 @@ import boto3
 from io import BytesIO
 import os
 import base64
+import time
 
 
 class ML:
@@ -64,7 +65,7 @@ class ML:
 
         df['Forecast'] = np.nan
         last_date = df.iloc[-1].name
-        last_unix = last_date.timestamp()
+        last_unix = time.mktime(last_date.timetuple())
         one_day = 86400
         next_unix = last_unix + one_day
 
