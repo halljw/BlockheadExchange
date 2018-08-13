@@ -26,9 +26,9 @@ class ChartCreator(object):
 	def find_largest_swing(self):
 		
 		currency_dict = {}
-        client = boto3.client('s3',
-                              aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-                              aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
+		client = boto3.client('s3',
+							  aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+							  aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 		# for currency in currency_list:
 		# 	currency_file = 'data/' + currency + '.txt'
 		obj = s3.get_object(Bucket="blockhead-ex-02", Key='{}.txt'.format("Bitcoin"))
