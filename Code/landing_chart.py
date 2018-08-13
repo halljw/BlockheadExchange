@@ -13,36 +13,38 @@ import matplotlib.ticker as ticker
 from io import BytesIO
 import base64
 import boto3
+import os
 
 class ChartCreator(object):
 	"""docstring for FileWork"""
-	def __init__(self):
-		x = 12
-
-	def find_largest_swing(self):
-		currency_list = ['Bitcoin', 'Litecoin', 'Monero', 'Bitcoin-Cash', 'Bitcoin-Gold',
+	def __init__(self, currency):
+		self.currency_list = ['Bitcoin', 'Litecoin', 'Monero', 'Bitcoin-Cash', 'Bitcoin-Gold',
 		'Cardano', 'Dash', 'EOS', 'Ethereum-Classic', 'Ethereum', 'IOTA', 'NEM', 'NEO',
 		'Qtum', 'Ripple', 'Stellar-Lumens']
+		self.currency = currency
+
+	def find_largest_swing(self):
+		
 		currency_dict = {}
-		s3 = boto3.resource('s3')
-		bucket = 'blockhead-ex-01'
-		for s3_file in s3.Bucket(bucket).objects.all():
-    		print(s3_file.key)
-		for currency in currency_list:
-			currency_file = 'data/' + currency + '.txt'
-			s3.meta.client.download_file(bucket, "{}.txt".format(currency), currency_file)
-			with open(currency_file, 'rb') as coin_file:
-				coin_array = np.genfromtxt(coin_file, delimiter=',', dtype=None)
-				compare_array_string = coin_array[-7::6]
-				compare_array = compare_array_string.astype(np.float)
-				vol_diff = (compare_array[0][5] - compare_array[1][5]) / ((compare_array[0][5] + compare_array[1][5]) / 2)
-				currency_dict[currency_file]=abs(vol_diff)
-		largest_vol_swing = 'Data/Bitcoin.txt'
-		for currency in currency_dict:
-			if currency_dict[currency] >= currency_dict[largest_vol_swing]:
-				largest_vol_swing = currency
-		largest_vol_swing_str = largest_vol_swing[8:-4]
-		return (largest_vol_swing)
+        client = boto3.client('s3',
+                              aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+                              aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
+		# for currency in currency_list:
+		# 	currency_file = 'data/' + currency + '.txt'
+		obj = s3.get_object(Bucket="blockhead-ex-02", Key='{}.txt'.format("Bitcoin"))
+		self.btc_df = pd.read_csv(BytesIO(obj['Body'].read()))
+		obj = s3.get_object(Bucket="blockhead-ex-02", Key='{}.txt'.format(self.currency))
+		self.compare_df = pd.read_csv(BytesIO(obj['Body'].read()))
+		# 	coin_array = np.genfromtxt(coin_file, delimiter=',', dtype=None)
+		# 	compare_array_string = coin_array[-7::6]
+		# 	compare_array = compare_array_string.astype(np.float)
+		# 	vol_diff = (compare_array[0][5] - compare_array[1][5]) / ((compare_array[0][5] + compare_array[1][5]) / 2)
+		# 	currency_dict[currency_file]=abs(vol_diff)
+		# for currency in currency_dict:
+		# 	if currency_dict[currency] >= currency_dict[largest_vol_swing]:
+		# 		largest_vol_swing = currency
+		# largest_vol_swing_str = largest_vol_swing[8:-4]
+		return (self.currency)
 		# self.create_chart(largest_vol_swing, largest_vol_swing_str, '../Data/Bitcoin.txt')
 
 	def file_to_name(self, input_currency):
@@ -65,43 +67,45 @@ class ChartCreator(object):
 
 	def create_chart_ma(self, input_file, coin_name, btc_file):
 		#dataset1 setup
-		compare_data = pd.read_csv(input_file)
-		btc_data = pd.read_csv(btc_file)
+		compare_data = self.compare_df
+		btc_data = self.btc_df
 		compare_data.rename(columns={'VOL' : 'VOLUME'}, inplace=True)
 		compare_data['15 DAY ROLLING MEAN'] = pd.rolling_mean(compare_data['CLOSE'],15)
 		top = compare_data.head(0)
 		bottom = compare_data.tail(90)
 		recent_quarter = pd.concat([top, bottom])
-		recent_quarter['DATE'] = pd.to_datetime(recent_quarter['DATE'], format='%Y%m%d')
+		recent_quarter['DATE'] = pd.to_datetime(recent_quarter['DATE'], format='%m/%d/%Y')
 		recent_quarter.set_index('DATE', inplace=True)
 
 		#chart1 manipulation
 		chart = recent_quarter[['CLOSE', '15 DAY ROLLING MEAN']].plot()
-		chart.grid(color='k', axis='y', linestyle='dotted')
-		chart.set_xlabel('Date', fontname='Trebuchet MS', fontsize=16)
-		chart.set_ylabel('Price', fontname='Trebuchet MS', fontsize=16)
+		chart.grid(axis='y', color="black")
+		chart.set_xlabel('Date', fontname='Trebuchet MS', fontsize=20, color="black")
+		chart.tick_params(axis='x', colors='black')
+		chart.set_ylabel('Price', fontname='Trebuchet MS', fontsize=20, color="black")
+		chart.tick_params(axis='y', colors='black')
 		chart.legend(fancybox=True)
 		chart.set_facecolor('#90f1a3')
-		chart.set_title("%s 90 Day Price Chart" % coin_name, fontname='Trebuchet MS', fontsize=20)
+		chart.set_title("%s 90 Day Price Chart" % self.currency, fontname='Trebuchet MS', fontsize=20)
 
 		fig_left = BytesIO()
 		plt.tight_layout()
 		plt.savefig('plot.png')
-		plt.savefig(fig_left, format='png')
+		plt.savefig(fig_left, format='png', transparent=True)
 		fig_left.seek(0)
 		fig_left_png = base64.b64encode(fig_left.getvalue())
 
 		return (fig_left_png)
 		
 	def create_chart_pv(self, input_file, coin_name, btc_file):
-		compare_data = pd.read_csv(input_file)
-		btc_data = pd.read_csv(btc_file)
+		compare_data = self.iota_df
+		btc_data = self.btc_data
 		compare_data.rename(columns={'VOL' : 'VOLUME'}, inplace=True)
 		compare_data['15 DAY ROLLING MEAN'] = pd.rolling_mean(compare_data['CLOSE'],15)
 		top = compare_data.head(0)
 		bottom = compare_data.tail(90)
 		recent_quarter = pd.concat([top, bottom])
-		recent_quarter['DATE'] = pd.to_datetime(recent_quarter['DATE'], format='%Y%m%d')
+		recent_quarter['DATE'] = pd.to_datetime(recent_quarter['DATE'], format='%m/%d/%Y')
 		recent_quarter.set_index('DATE', inplace=True)
 
 		#dataset2 setup
@@ -115,7 +119,7 @@ class ChartCreator(object):
 		#dataset2a setup
 		fourteen_top = fourteen.reset_index()
 		fourteen_top = fourteen_top.drop('index', 1)
-		fourteen_top['DATE'] = pd.to_datetime(fourteen_top['DATE'], format='%Y%m%d')
+		fourteen_top['DATE'] = pd.to_datetime(fourteen_top['DATE'], format='%m/%d/%Y')
 		fourteen_top['DATE'] = fourteen_top['DATE'].map(mdates.date2num)
 
 		#chart2a setup
@@ -140,7 +144,7 @@ class ChartCreator(object):
 		fig_right = BytesIO()
 		plt.tight_layout()
 		plt.savefig('plot.png')
-		plt.savefig(fig_right, format='png')
+		plt.savefig(fig_right, format='png', transparent=True)
 		fig_right.seek(0)
 		fig_right_png = base64.b64encode(fig_right.getvalue())
 

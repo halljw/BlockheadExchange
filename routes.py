@@ -5,6 +5,7 @@ from flask import Flask, render_template, request
 from Code.Analyzer import *
 from Twitter.twitter_searcher import *
 from Code.landing_chart import *
+from Code.ml import *
 from os import listdir
 import datetime
 import urllib
@@ -18,17 +19,42 @@ def landing():
     tweet_id, twitter_user = ts.get_tweet()
     href_output = "https://twitter.com/" + str(twitter_user) + "/status/" + str(tweet_id);
 
-    cc = ChartCreator()
+    algs = ["Lars", "BayesianRidge", "LinearRegression"]
+
+    alg_input = request.form.get('alg')
+    if alg_input == "Lars":
+      alg_input = Lars
+    elif alg_input == "BayesianRidge":
+      alg_input = BayesianRidge
+    else:
+      alg_input = LinearRegression
+
+    days_out = request.form.get('days_out')
+    print(days_out)
+    if not days_out:
+      days_out = 30
+    coin = request.form.get('coin')
+    if not coin:
+      coin = "Bitcoin"
+    ml=ML(forecast_out=int(days_out), currency=coin, algorithm=alg_input)
+    cc=ChartCreator(coin)
     currency_file = cc.find_largest_swing()
     currency = cc.file_to_name(currency_file)
     chart_left = cc.create_chart_ma(currency_file, currency, 'Data/Bitcoin.txt')
-    chart_right = cc.create_chart_pv(currency_file, currency, 'Data/Bitcoin.txt')
+    coins = ['Litecoin', 'Monero', 'Bitcoin-Cash', 'Bitcoin-Gold',
+    'Cardano', 'Dash', 'EOS', 'Ethereum-Classic', 'Ethereum', 'IOTA', 'NEM', 'NEO',
+    'Qtum', 'Ripple', 'Stellar-Lumens', 'Bitcoin']
+    ml_ret=ml.draw()
+
 
     return render_template('landing.html',
       fig_left = chart_left,
-      fig_right = chart_right,
-      href_hail_mary = href_output, 
+      fig_right = ml_ret[0],
+      href_hail_mary = href_output,
+      accuracy=ml_ret[1], 
       id_output = tweet_id,
+      coins = coins,
+      algs=algs,
       handle_output = twitter_user)
 
 
@@ -108,4 +134,4 @@ def investment():
 			rm_window=rm_window)
 
 if __name__=='__main__':
-  app.run(debug=True)
+  app.run(debug=True, port=5005)

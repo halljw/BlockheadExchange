@@ -8,24 +8,56 @@
   <div class="crypto">
     <h2>Apply ML Algorithms to Current Trading Data!</h2>  
     <div class="row">  
-      <div class="col-md-4">
+      <div class="col-md-6">
         <h3>
           Today's Trends
         </h3>
         <!-- From Tableau API, maintaining style formatting, chart 1 -->
         <div class='chart-left'>
-          <img src="data:image/png;base64,{{ fig_left }}" style="padding: 2px;">
+          <img src="data:image/png;base64,{{ fig_left }}" style="padding: 30px; height: 450px; padding-top: 0px;">
         </div>  
-        <div class='chart-right'>
-          <img src="data:image/png;base64,{{ fig_right }}" style="padding: 2px;">
-        </div> 
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <h3>
           Test an Algorithm
         </h3>
+        <div class='chart-right'>
+          <img src="data:image/png;base64,{{ fig_right }}" style="padding: 30px; height: 450px; padding-top: 0px">
+        </div> 
       </div>
     </div>
+    <form method="POST">
+      <div class="row">
+        <div class="col-md-2" style="text-align: center;">
+          <select name= "coin" method="GET" action="/">
+            {% for coin in coins %}
+            <option value= "{{coin}}" SELECTED>{{coin}}</option>"
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-2" style="text-align: center;">
+          <input type="range" min="1" max="100" value="30" step="1" class="slider1" id="days_out" name="days_out">
+          <p>Days to Project: <span id="demo5"></span></p>
+        </div>
+        <div class="col-md-2" style="text-align: center">
+          <select name= "alg" method="GET" action="/">
+            {% for alg in algs %}
+            <option value= "{{alg}}" SELECTED>{{alg}}</option>"
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <p style="text-align: center; font-size: 16px; font-style: italic;">Accuracy : {{ accuracy }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2" style="text-align: center;">
+          <input type="submit" class="btn btn-default" value="Submit" style="background-color: maroon; color: white">
+        </div>
+      </div>
+    </form>
   </div>
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -61,7 +93,7 @@
         </p>
         <br>
         <p>
-          To use our tool, select a currency and a machine learning algorithm. You will be able to try KNN, Polynomial Regression, and *** along with the option of adding your own parameters.
+          To use our tool, select a currency and a machine learning algorithm. You will be able to try Linear Regression, Bayesian Ridge, and Lars. The features we use are closing price, the daily trading range as a percent of price, the high/low change, and volume.
         </p>
       </div>
     </div>
@@ -140,6 +172,16 @@
  })(jQuery);
 }
   </script>
+
+<script>
+    var slider4 = document.getElementById("days_out");
+    var output4 = document.getElementById("demo5");
+    output4.innerHTML = slider4.value;
+
+    slider4.oninput = function() {
+      output4.innerHTML = this.value;
+    }
+</script>
 
 
 {% endblock %}
