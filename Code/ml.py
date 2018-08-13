@@ -22,11 +22,11 @@ class ML:
                               aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
                               aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
         if algorithm == LinearRegression:
-            self.alg_name = "LinearRegression"
+            self.alg_name = "LinReg"
         elif algorithm == Lars:
             self.alg_name = "Lars"
         elif algorithm == BayesianRidge:
-            self.alg_name = "BayesianRidge"
+            self.alg_name = "BayesRidge"
         obj = client.get_object(Bucket="blockhead-ex-02", Key='{}.txt'.format(currency))
         df = pd.read_csv(BytesIO(obj['Body'].read()))
         df['DATE'] = pd.to_datetime(df['DATE'])
@@ -91,7 +91,7 @@ class ML:
         chart.legend(fancybox=True)
         chart.set_facecolor('#40f123')
 
-        chart.set_title("{} With {} Days Projected".format(self.alg_name, self.forecasted_dates), fontname='Trebuchet MS', fontsize=24, color="black")
+        chart.set_title("{}, Projecting {} Days".format(self.alg_name, self.forecasted_dates), fontname='Trebuchet MS', fontsize=22, color="black")
 
         fig = BytesIO()
         plt2.tight_layout()
